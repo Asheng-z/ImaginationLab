@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>想像力實驗室</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    header, section, footer {
+      padding: 40px 20px;
+      max-width: 960px;
+      margin: auto;
+    }
+    nav {
+      background: #333;
+      color: #fff;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: #fff;
+      margin-right: 20px;
+      text-decoration: none;
+      font-style: normal;
+    }
+    .logo-banner {
+      text-align: center;
+      background-color: #f9f9f9;
+      padding: 20px 0;
+    }
+    .logo-banner img {
+      max-width: 300px;
+      height: auto;
+    }
+    h2 {
+      border-bottom: 2px solid #eee;
+      padding-bottom: 10px;
+    }
+    .section {
+      margin-bottom: 60px;
+    }
+    .footer {
+      background: #f2f2f2;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .image-row {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      gap: 20px;
+    }
+    .image-row img {
+      flex: 1 1 calc(80% - 1px);
+      max-width: calc(80% - 1px);
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .caption {
+      text-align: center;
+      font-size: 0.9em;
+      color: #555;
+      margin-top: 5px;
+    }
+    .image-column {
+      flex: 1 1 calc(80% - 1px);
+      max-width: calc(80% - 1px);
+    }
+    .line-contact {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .line-contact img {
+      width: 100px;
+      height: auto;
+    }
+    form {
+      margin-top: 20px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 導覽列 -->
+  <nav>
+    <a href="#about">關於我們</a>
+    <a href="#services">系列課程</a>
+    <a href="#curriculum">課程內容</a>
+    <a href="#portfolio">學生作品分享</a>
+    <a href="#partners">開課學校</a>
+    <a href="#contact">聯絡</a>
+  </nav>
+
+  <!-- LOGO橫幅 -->
+  <div class="logo-banner">
+    <img src="images/logo.png" alt="想像力實驗室 Logo">
+  </div>
+
+  <!-- 主視覺 -->
+  <header>
+    <h1>【想像力實驗室｜用創意開啟孩子的未來】</h1>
+    </p>
+  </header>
+
+  <!-- 關於我們 -->
+  <section id="about" class="section">
+    <h2>工作室簡介</h2>
+    <p>在科技迅速發展的時代，孩子需要的已不侷限於知識，更要具備創造能力與解決問題的思維能力。<br>想像力實驗室專注於國小階段的兒童程式設計教育，結合多年的教學經驗與專業團隊，打造出一系列兼具趣味與挑戰的課程，讓孩子在快樂中學習，在實作中成長。以 Scratch 遊戲開發 與 Micro:bit 軟硬體實作為核心，從遊戲設計、動畫互動到軟硬體整合應用，讓孩子透過動手做、動腦想，在實作中自然建立邏輯思維與創意思考能力。</p>
+    <h2>工作室經歷</h2>
+    <p>111學年度 - 想像力實驗室成立。<br>112學年度 - 受數間學校邀請合作開立課程、暑期資訊課輔。<br>113學年度 - 於約50間學校教導孩子創意實踐與程式語言。<br>114學年度 - 精心設計近百款課程專案，保持孩子的學習熱情，小孩積極主動聽課，也讓家長放心。</p>
+    <h2>工作室理念</h2>
+    <p>我們深信，學習不能只是知識的堆疊，更應該是一次又一次的「做中學」歷程。透過每個專案、每次嘗試，孩子學會的不只是寫程式，更是如何觀察問題、分析流程、提出解法並勇敢實踐。在想像力實驗室，我們不只是教程式，更是透過程式啟發孩子的想像與潛能。<br>我們陪伴他們從零開始，勇敢嘗試、從錯誤中學習，一步步培養出解決問題的能力與對世界的好奇心。我們相信，孩子不是被動的學習者，而是未來世界的創造者。而我們的任務，就是成為他們通往創意與科技世界的橋樑。</p>
+    <div class="imagelabphoto">
+        <center><img src="images/photo.png" width="45.5%"  alt="想像力實驗室照片"></center>
+    </div>     
+  </section>
+
+  <!-- 系列課程 -->
+  <section id="services" class="section">
+    <h2>系列課程</h2>
+    <h4>Scratch小小遊戲設計師</h4>
+    <p>以圖像化程式語言 Scratch 為基礎，引導孩子學習邏輯思維與基礎程式概念。從角色動畫、互動遊戲到專題製作，讓孩子在創作中培養運算思維與創造力，輕鬆進入程式世界，做出屬於自己的遊戲作品。</p>
+    <br>
+    <h4>Micro:bit小小創客工程師</h4>
+    <p>結合 Micro:bit 微型電腦板與感測器模組，孩子將實際操作硬體，學習程式控制與智慧應用。從簡單的燈光控制、距離偵測，到互動裝置設計，培養邏輯思考與動手能力。這不只是寫程式，更是進入未來科技世界的第一步！</p>
+  </section>
+
+  <!-- 課程內容 -->
+  <section id="curriculum" class="section">
+    <h2>課程內容</h2>
+    <p>我們設計了超過百種主題豐富的專案課程，每學期皆規劃初階、中階、進階以及期中、期末總複習課程，讓孩子能隨著學習歷程，逐步深化對程式設計的理解與應用。<br>從基礎邏輯入門，到進階應用，每個階段皆以專案實作為核心，引導孩子在動手做中累積經驗、在挑戰中建立自信。無論是初學者還是已有基礎的學生，都能找到適合自己的學習節奏與發展方向。</p>
+    <div class="courseimage">
+        <center><img src="images/course1.jpg" width="50%" alt="課程圖1"><center>
+        <div class="caption">Scratch小小遊戲設計師 課表範例</div>
+    </div>
+  </section>
+
+  <!-- 課程進行方式 -->
+<section id="method" class="section">
+  <h2>課程進行方式</h2>
+  <div class="image-row" style="display: flex; gap: 20px;">
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+      <img src="images/method1.jpg" alt="教學演示" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+      <div class="caption">每堂課由老師引導示範，建立學習基礎。</div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+      <img src="images/method2.jpg" alt="學生實作" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+      <div class="caption">學生動手實作，深化理解與創造力。</div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+      <img src="images/method3.jpg" alt="專題發表" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+      <div class="caption">引導學生加入巧思，並於課堂尾聲進行複習。</div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- 作品分享 
+  <section id="portfolio" class="section">
+    <h2>學生作品分享</h2>
+    <div class="gallery">
+      <img src="images/sample1.jpg" alt="作品1">
+      <img src="images/sample2.jpg" alt="作品2">
+      <img src="images/sample3.jpg" alt="作品3">
+    </div>
+    <p style="font-size: 0.9em; color: gray;"></p>
+  </section> -->
+
+  <!-- 開課學校 -->
+  <section id="partners" class="section">
+    <h2>開課學校</h2>
+    <p>（放 Logo 或名稱清單）</p>
+  </section>
+
+  <!-- 聯絡我們 -->
+  <section id="contact" class="section">
+    <h2>聯絡我們</h2>
+    <p><b>Email:</b> imagelab365@gmail.com</p>
+    <div class="line-contact">
+      <p><b>Line:</b> @888hvxnr</p>
+      <img src="images/line-qrcode.png" alt="Line QRCODE">
+    </div>
+    <form action="https://formspree.io/f/your-id" method="POST">
+      <input type="text" name="name" placeholder="您的姓名" required />
+      <input type="email" name="email" placeholder="您的 Email" required />
+      <textarea name="message" rows="5" placeholder="您的留言或問題" required></textarea>
+      <button type="submit">送出</button>
+    </form>
+  </section>
+
+  <!-- 頁尾 -->
+  <footer class="footer">
+    &copy; 2025 想像力實驗室. Imagination Lab.
+  </footer>
+
+</body>
+</html>
