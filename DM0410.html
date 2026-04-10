@@ -130,6 +130,21 @@
             body { padding: 0 !important; margin: 0 !important; }
             .page-wrapper { margin: 0 !important; box-shadow: none !important; page-break-after: always !important; }
         }
+        /* 手機版強制等比例縮放 */
+        @media screen and (max-width: 1250px) {
+            body {
+                /* 確保 body 高度能容納縮放後的內容 */
+                min-height: auto;
+                padding: 10px 0;
+            }
+            .page-wrapper {
+                /* 計算縮放比例：(視窗寬度 - 左右邊距) / 原始寬度1200 */
+                transform: scale(calc(min(100vw - 20px, 1200px) / 1200));
+                transform-origin: top center;
+                /* 縮放後會產生多餘的留白，用負 margin 修正間距 */
+                margin-bottom: calc(-630px * (1 - min(100vw - 20px, 1200px) / 1200) + 20px);
+            }
+        }
     </style>
 </head>
 <body>
