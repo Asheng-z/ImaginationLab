@@ -130,6 +130,72 @@
             body { padding: 0 !important; margin: 0 !important; }
             .page-wrapper { margin: 0 !important; box-shadow: none !important; page-break-after: always !important; }
         }
+        /* =========================================
+           手機版響應式 (RWD) 修復語法
+           ========================================= */
+        @media (max-width: 1024px) {
+            /* 1. 外框：解除 1200x630 的限制，允許向下延伸並縮排 */
+            .page-wrapper {
+                width: 95% !important; 
+                height: auto !important;
+                min-height: auto !important;
+                flex-direction: column !important;
+                margin: 0 auto 30px auto !important;
+                border-radius: 20px !important; 
+            }
+
+            /* 2. 第一、二層主要區塊改為滿版上下堆疊 */
+            .page-wrapper > div,
+            #page2 > div.flex-1 > div {
+                flex: none !important;
+                width: 100% !important;
+            }
+
+            /* 3. 光暈修正：避免特效太寬撐破畫面產生左右捲軸 */
+            .glow {
+                width: 100vw !important;
+                height: 100vw !important;
+            }
+
+            /* --- 第 1 頁修正 --- */
+            #page1 > div:first-child { padding: 30px 20px !important; }
+            #page1 .grid-cols-3 { grid-template-columns: 1fr !important; }
+            #page1 > div:first-child > div:last-child { flex-direction: column !important; align-items: flex-start !important; gap: 15px !important; }
+            #page1 > div:first-child > div:last-child > div:first-child { flex-direction: column !important; gap: 10px !important; }
+            #page1 > div:first-child > div:last-child > div:last-child { text-align: left !important; }
+
+            /* --- 第 2 頁修正 --- */
+            #page2 > div.flex-1 { padding: 30px 20px !important; flex-direction: column !important; }
+            #page2 .venn-container { transform: scale(0.85); margin: 0 auto -10px auto !important; } 
+
+            /* --- 第 3 頁修正 --- */
+            #page3 > div:first-child { padding: 30px 20px 80px 20px !important; }
+            /* 讓課表支援手指橫向滑動 */
+            .schedule-table { 
+                display: block !important; 
+                overflow-x: auto !important; 
+                white-space: nowrap !important;
+                -webkit-overflow-scrolling: touch; 
+            }
+
+            /* --- 第 4 頁修正 --- */
+            #page4 > div.w-full { padding: 30px 20px !important; }
+            #page4 .grid-cols-12 { display: flex !important; flex-direction: column !important; gap: 20px !important; } 
+            
+            /* 地圖與場地資訊卡片改為上下排列 */
+            #page4 .info-card { flex-direction: column !important; text-align: center !important; gap: 15px !important; }
+            #page4 .info-card > div:first-child { 
+                border-right: none !important; 
+                border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important; 
+                padding-right: 0 !important; 
+                padding-bottom: 15px !important;
+            }
+            #page4 .info-card > div:last-child { margin-left: 0 !important; display: flex; justify-content: center; }
+            
+            /* 第四頁最下方報名卡片的聯絡資訊排版 */
+            #page4 .bg-white > div:first-child { flex-direction: column !important; gap: 20px !important; }
+            #page4 .bg-white .space-y-4 { display: flex; flex-direction: column; align-items: center; width: 100%; }
+        }
     </style>
 </head>
 <body>
