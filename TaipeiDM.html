@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI營隊四頁式DM - 台北營隊 - 想像力實驗室</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap');
+        
+        * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: #f8fafc; /* 乾淨的淺灰白底 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 0;
+        }
+
+        /* 嚴格固定頁面尺寸 1200x630 */
+        .page-wrapper {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #fdf4ff 0%, #f3e8ff 50%, #e0e7ff 100%) !important; /* 淡紫粉色漸層 */
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 40px 100px -20px rgba(147, 51, 234, 0.15); /* 紫色柔和陰影 */
+            margin-bottom: 50px;
+            border: 1px solid #e9d5ff;
+        }
+
+        /* 科技感微點陣底紋 (改為淺紫色) */
+        .page-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(rgba(147, 51, 234, 0.1) 1.5px, transparent 1.5px);
+            background-size: 16px 16px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .glow {
+            position: absolute;
+            width: 800px; height: 800px;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 1;
+        }
+        .glow-orange { background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%) !important; }
+        .glow-amber { background: radial-gradient(circle, rgba(192, 132, 252, 0.15) 0%, transparent 70%) !important; }
+        .glow-blue { background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, transparent 70%) !important; } 
+
+        .main-title { font-weight: 900; letter-spacing: -0.02em; line-height: 1.1; font-size: 3.8rem; color: #0f172a !important; }
+        .highlight-text {
+            background: linear-gradient(90deg, #9333ea, #c084fc) !important; /* 深紫到亮紫漸層 */
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+
+        .logo-refinement {
+            border-radius: 1rem; 
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 5%, black 95%, transparent 100%);
+            mask-composite: intersect;
+            -webkit-mask-composite: source-in;
+            filter: invert(1) brightness(0.2); 
+        }
+
+        .tech-clip {
+            clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+        }
+
+        /* 文字框基礎樣式 - 淺色版 */
+        .feature-box {
+            background-size: cover !important;
+            background-position: right center !important;
+            background-repeat: no-repeat !important;
+            background-origin: border-box !important;
+            border-radius: 12px;
+            border: 1px solid rgba(147, 51, 234, 0.2) !important;
+            overflow: hidden;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 24px 30px;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,0) 100%) !important;
+            box-shadow: 0 10px 30px -10px rgba(147, 51, 234, 0.1);
+        }
+
+        .feature-title { color: #9333ea !important; font-weight: 900; font-size: 1.25rem; margin-bottom: 0.4rem; }
+        .feature-quote { color: #a855f7 !important; font-weight: 700; font-style: italic; font-size: 0.85rem; line-height: 1.4; margin-bottom: 0.4rem; }
+        .feature-desc { color: #334155 !important; font-size: 0.8rem; line-height: 1.5; }
+        .feature-list { color: #475569 !important; font-size: 0.75rem; margin-top: 0.25rem; margin-left: 0.5rem; }
+        .feature-list strong { color: #0f172a !important; font-weight: 700; }
+
+        /* Venn Diagram - 調整 c1 位置避免壓到下方 */
+        .venn-container { position: relative; width: 350px; height: 330px; margin: 0 auto; }
+        .venn-circle {
+            position: absolute;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; font-weight: 900; font-size: 1.2rem;
+            color: white !important;
+            border: 2px solid rgba(255,255,255,0.8) !important;
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.2) !important;
+        }
+        .c1 { background: rgba(147, 51, 234, 0.85) !important; top: -15px; left: 75px; z-index: 10; } 
+        .c2 { background: rgba(168, 85, 247, 0.85) !important; bottom: 10px; left: 0; } 
+        .c3 { background: rgba(192, 132, 252, 0.85) !important; bottom: 10px; right: 0; } 
+
+        /* 台北雙日專屬課表樣式 - 淺色版 */
+        .schedule-table-taipei { width: 100%; border-collapse: separate; border-spacing: 4px; font-size: 0.8rem; table-layout: fixed; position: relative; z-index: 10;}
+        .schedule-table-taipei th { background: rgba(147, 51, 234, 0.8); color: white !important; padding: 8px; border-radius: 10px; font-weight: 900; font-size: 1rem; box-shadow: 0 4px 10px rgba(147, 51, 234, 0.15);}
+        .schedule-table-taipei td { 
+            background-color: rgba(168, 85, 247, 0.05) !important; 
+            color: #334155 !important; padding: 6px 10px; border-radius: 10px; 
+            text-align: center; height: 46px; vertical-align: middle; line-height: 1.3;
+            position: relative; overflow: hidden; background-position: right -5px bottom -5px !important;
+            background-size: 35px !important; background-repeat: no-repeat !important;
+            border: 1px solid rgba(147, 51, 234, 0.1);
+        }
+        .schedule-table-taipei .day-tag { display: block; font-size: 0.85rem; color: #9333ea; font-weight: 900; margin-bottom: 2px; text-transform: uppercase; position: relative; z-index: 2; }
+        .break-time { background-color: rgba(147, 51, 234, 0.08) !important; border: 1px dashed rgba(168, 85, 247, 0.4) !important; }
+
+        /* 鮮豔圖標分類 (轉換為紫粉色系) */
+        .bg-icon-project { background-image: url('data:image/svg+xml;utf8,<svg fill="%23c084fc" opacity="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5a2.5 2.5 0 0 0-5 0V5H4c-1.1 0-2 .9-2 2v4h1.5a2.5 2.5 0 0 1 0 5H2v4c0 1.1.9 2 2 2h4v-1.5a2.5 2.5 0 0 1 5 0V22h4c1.1 0 2-.9 2-2v-4h1.5a2.5 2.5 0 0 0 0-5z"/></svg>'); }
+        .bg-icon-ai { background-image: url('data:image/svg+xml;utf8,<svg fill="%2322c55e" opacity="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a2 2 0 0 1 2 2v2h2a3 3 0 0 1 3 3v2.29A4 4 0 0 1 21 15v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3a4 4 0 0 1 2-3.71V9a3 3 0 0 1 3-3h2V4a2 2 0 0 1 2-2zM9 13H7v2h2v-2zm8 0h-2v2h2v-2z"/></svg>'); }
+        .bg-icon-tool { background-image: url('data:image/svg+xml;utf8,<svg fill="%23a855f7" opacity="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>'); }
+        .bg-icon-result { background-image: url('data:image/svg+xml;utf8,<svg fill="%23f472b6" opacity="0.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>'); }
+
+        .photo-footer { position: absolute; bottom: 0; left: 0; width: 100%; height: 200px; z-index: 1; }
+        .photo-footer img { width: 100%; height: 100%; object-fit: cover; mask-image: linear-gradient(to top, white 60%, transparent 100%); opacity: 0.3; }
+
+        .info-card { background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(147, 51, 234, 0.2); border-radius: 12px; padding: 20px; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(147, 51, 234, 0.05); }
+        .price-card { background: rgba(255, 255, 255, 0.95) !important; border: 1px solid rgba(147, 51, 234, 0.2) !important; border-radius: 8px; padding: 16px 10px; text-align: center; }
+        .map-box { background: rgba(243, 232, 255, 0.5) !important; border: 2px dashed rgba(168, 85, 247, 0.4) !important; border-radius: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        @media print {
+            @page { size: 1200px 630px landscape; margin: 0; }
+            body { padding: 0 !important; margin: 0 !important; }
+            .page-wrapper { margin: 0 !important; box-shadow: none !important; page-break-after: always !important; border: none !important; }
+        }
+        /* 手機版響應式 */
+        @media (max-width: 1024px) {
+            .page-wrapper {
+                width: 95% !important; 
+                height: auto !important;
+                min-height: auto !important;
+                flex-direction: column !important;
+                margin: 0 auto 30px auto !important;
+                border-radius: 20px !important; 
+            }
+            .page-wrapper > div,
+            #page2 > div.flex-1 > div { flex: none !important; width: 100% !important; }
+            .glow { width: 100vw !important; height: 100vw !important; }
+            #page1 > div:first-child { padding: 30px 20px !important; }
+            #page1 .grid-cols-3 { grid-template-columns: 1fr !important; }
+            #page2 > div.flex-1 { padding: 30px 20px !important; flex-direction: column !important; }
+            #page2 .venn-container { transform: scale(0.85); margin: 0 auto -10px auto !important; } 
+            #page3 > div:first-child { padding: 30px 20px 80px 20px !important; }
+            .schedule-table-taipei { display: block !important; overflow-x: auto !important; white-space: nowrap !important; }
+            #page4 > div.w-full { padding: 30px 20px !important; }
+            #page4 .grid-cols-12 { display: flex !important; flex-direction: column !important; gap: 20px !important; } 
+            #page4 .info-card { flex-direction: column !important; text-align: center !important; gap: 15px !important; }
+            #page4 .info-card > div:first-child { border-right: none !important; border-bottom: 1px solid rgba(147, 51, 234, 0.2) !important; padding-right: 0 !important; padding-bottom: 15px !important; }
+            #page4 .info-card > div:last-child { margin-left: 0 !important; display: flex; justify-content: center; }
+            #page4 .bg-white > div:first-child { flex-direction: column !important; gap: 20px !important; }
+            #page4 .bg-white .space-y-4 { display: flex; flex-direction: column; align-items: center; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-wrapper" id="page1">
+        <div class="glow glow-orange" style="top: -200px; right: -100px;"></div>
+        <div class="glow glow-blue" style="bottom: -200px; left: -100px;"></div>
+        <div class="flex-[1.4] p-[50px_70px] z-10 flex flex-col justify-between">
+            <div>
+                <div class="flex items-center mb-4">
+                    <div class="logo-refinement"><img src="images/logo反白.png" alt="Logo" class="h-24 w-auto object-contain"></div>
+                </div>
+                
+                <div class="inline-block bg-cyan-500 text-white px-3 py-1 rounded-full text-xs font-black mb-3 shadow-sm">📍 2026 台北旗艦場</div>
+                
+                <h1 class="main-title mb-4">AI 素養 X<br><span class="highlight-text">Scratch 遊戲工程營</span></h1>
+                <p class="text-purple-700 text-lg font-bold mb-8 opacity-90 leading-relaxed max-w-2xl">「在這個 AI 快速擴張的時代，我們不只教孩子如何『用』科技，更教他們如何『駕馭』科技。」</p>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-white border border-purple-200 shadow-sm p-4 rounded-[16px] rounded-tl-sm rounded-br-sm">
+                        <div class="text-purple-600 font-black mb-1 text-sm">01 AI 全流程導覽</div>
+                        <p class="text-slate-600 text-[10px] leading-relaxed">打造日常「AI 防護罩」，拒絕淺層操作，回歸基礎邏輯與技術原理。</p>
+                    </div>
+                    <div class="bg-white border border-purple-200 shadow-sm p-4 rounded-[16px] rounded-tl-sm rounded-br-sm">
+                        <div class="text-purple-600 font-black mb-1 text-sm">02 雙軌專案實作</div>
+                        <p class="text-slate-600 text-[10px] leading-relaxed">遊戲創作與一頁式網站，結合專屬 QR Code 鑰匙圈實體成果。</p>
+                    </div>
+                    <div class="bg-white border border-purple-200 shadow-sm p-4 rounded-[16px] rounded-tl-sm rounded-br-sm">
+                        <div class="text-purple-600 font-black mb-1 text-sm">03 高規格教學體驗</div>
+                        <p class="text-slate-600 text-[10px] leading-relaxed">統一提供同規格高效能筆電，消除硬體落差，100% 專注思考創作。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-end justify-between border-t border-purple-200 pt-6 z-10">
+                <div class="flex gap-10 text-slate-800">
+                    <div>
+                        <span class="block text-purple-600 text-[14px] font-black mb-1 uppercase">台北假日雙日營隊</span>
+                        <span class="font-black text-[1.15rem] tracking-tighter">第一梯 北車場 [7/04 - 7/05] ｜ 第二梯 敦化場 [7/18 - 7/19]</span>
+                        <span class="block text-purple-600 text-[10px] mt-1 font-bold">08:30 - 17:00 (可延拖)</span>
+                    </div>
+                </div>
+                <div class="text-right"><span class="block text-purple-500 text-[10px] font-black uppercase mb-1">適合年齡</span><span class="text-slate-800 font-bold text-lg">國小 2-6 年級</span></div>
+            </div>
+        </div>
+        <div class="flex-[0.6] p-10 z-10 flex flex-col justify-center items-center bg-white/40 backdrop-blur-xl border-l border-purple-100">
+            <div class="w-full mb-8 overflow-hidden shadow-xl bg-purple-50 tech-clip">
+                <img src="images/第一頁圖.png" alt="主視覺" class="w-full h-64 object-cover">
+            </div>
+            
+            <div class="w-full bg-gradient-to-r from-cyan-400 to-cyan-500 rounded-xl p-5 text-center mb-6 shadow-xl">
+                <p class="text-cyan-50 text-[10px] font-black tracking-widest mb-1 uppercase">TAIPEI EXCLUSIVE</p>
+                <p class="text-white text-xl font-black">2026 台北限定・暑期營隊</p>
+            </div>
+            
+            <div class="flex flex-col items-center gap-2">
+                <a href="https://forms.gle/MATduYiXmwrSyniq6" target="_blank" class="w-16 h-16 bg-white rounded-xl p-1 shadow-md border border-purple-100 overflow-hidden hover:scale-110 transition-transform flex items-center justify-center cursor-pointer">
+                    <img src="images/報名QRcode.png" class="w-full h-full object-contain">
+                </a>
+                <p class="text-slate-700 text-[10px] font-bold">報名開始，早鳥優惠中！</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-wrapper" id="page2">
+        <div class="glow glow-orange" style="top: -200px; left: -100px;"></div>
+        <div class="glow glow-blue" style="bottom: -200px; right: -100px;"></div>
+        <div class="flex-1 p-[0_60px] z-10 flex flex-row-reverse gap-10 items-stretch overflow-hidden">
+            <div class="flex flex-col justify-center flex-[0.42] h-full">
+                <div class="w-full text-right mb-6">
+                    <h2 class="text-3xl text-slate-900 font-black mb-1 border-r-4 border-cyan-400 pr-4 uppercase whitespace-nowrap">為什麼選擇「想像力實驗室」</h2>
+                    <p class="text-purple-600 text-sm pr-5 italic font-bold">「在 AI 時代，賦予孩子駕馭未來的判斷力與創造力。」</p>
+                </div>
+                <div class="venn-container scale-95">
+                    <div class="venn-circle c1">運算思維<br>(Logic & Coding)</div>
+                    <div class="venn-circle c2">AI 素養<br>(AI Literacy)</div>
+                    <div class="venn-circle c3">數位策展<br>(Digital Portfolio)</div>
+                </div>
+                <div class="mt-4 text-center bg-white p-4 rounded-xl border border-purple-200 w-full shadow-md">
+                    <p class="text-slate-700 font-bold text-[13px] leading-relaxed">在 AI 時代，想像力實驗室以專業的師資、扎實的課程設計，以及完善的設備，讓孩子從認識 AI 到正確運用 AI，讓科技成為實現想像力的最強輔助。</p>
+                </div>
+            </div>
+            <div class="flex flex-col flex-[0.58] h-full space-y-4 pt-3 pb-2">
+                <div class="feature-box" style="background-image: linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,0) 100%), url('images/第二頁圖一.png') !important;">
+                    <h4 class="feature-title">1. AI 全流程導覽：打造日常「AI 防護罩」</h4>
+                    <p class="feature-quote">「懂得如何識破假訊息，比學會下指令更重要。」</p>
+                    <p class="feature-desc">我們避開淺層操作，回歸 AI 核心原理，培養：</p>
+                    <ul class="feature-list space-y-1">
+                        <li>● <strong>模型訓練：</strong>體驗「大規模數據集」如何建立判斷力原理。</li>
+                        <li>● <strong>媒體識讀：</strong>學習辨認 Deepfake 與假訊息，建立數位安全防護網。</li>
+                        <li>● <strong>高效應用：</strong>將 AI 轉化為輔助工具，避免過度依賴。</li>
+                    </ul>
+                </div>
+                <div class="feature-box" style="background-image: linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,0) 100%), url('images/第二頁圖二.png') !important;">
+                    <h4 class="feature-title">2. 遊戲創作 X 網頁作品集 X 實體成果</h4>
+                    <p class="feature-desc">親自編寫具備邏輯架構的個人遊戲，並透過 AI輔助建置個人網站。</p>
+                    <ul class="feature-list mt-1">
+                        <li>● <strong>客製作品：</strong>獲贈專屬 QR Code 鑰匙圈，掃描展示數位作品。</li>
+                        <li>● <strong>獨家成果：</strong>獲贈營隊專屬客製悠遊卡。</li>
+                    </ul>
+                </div>
+                <div class="feature-box" style="background-image: linear-gradient(to right, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 60%, rgba(255,255,255,0) 100%), url('images/第二頁圖三.png') !important;">
+                    <h4 class="feature-title">3. 高規格教學體驗：統一提供同規格設備</h4>
+                    <p class="feature-quote">「學習效率不該浪費在硬體除錯上。」</p>
+                    <p class="feature-desc font-bold">營隊全程提供每位學生同規格筆電。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-wrapper flex-col" id="page3">
+        <div class="w-full p-[30px_60px_0_60px] z-10 relative">
+            <div class="flex items-center gap-4 mb-4">
+                <div class="h-8 w-2 bg-cyan-400 rounded-none shadow-[0_0_20px_rgba(34,211,238,0.6)]"></div>
+                <h2 class="text-3xl text-slate-900 font-black tracking-tight">2026 台北營隊：假日雙日全日精選課表</h2>
+            </div>
+            <table class="schedule-table-taipei">
+                <thead>
+                    <tr>
+                        <th style="width: 14%">時段</th>
+                        <th style="width: 43%">Day 1：程式邏輯與 AI 共創</th>
+                        <th style="width: 43%">Day 2：精準產出與數位成果</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="font-black text-purple-700 bg-purple-100/50 !bg-none text-center">08:30~10:00</td>
+                        <td class="bg-icon-project"><span class="day-tag">走進 AI 邏輯世界</span>數位運作邏輯、AI 原理初探</td>
+                        <td class="bg-icon-ai"><span class="day-tag">AI 邏輯挑戰與進度回顧</span>快速接習與 AI 協作技巧</td>
+                    </tr>
+                    <tr>
+                        <td class="font-black text-purple-700 bg-purple-100/50 !bg-none text-center">10:00~11:00</td>
+                        <td class="bg-icon-ai"><span class="day-tag">AI 科技素養 I</span>機器學習原理、科技倫理與版權概念</td>
+                        <td class="bg-icon-project"><span class="day-tag">遊戲專案實作 III</span>進階關卡與邏輯錯整合</td>
+                    </tr>
+                    <tr>
+                        <td class="font-black text-purple-700 bg-purple-100/50 !bg-none text-center">11:00~12:00</td>
+                        <td class="bg-icon-tool"><span class="day-tag">AI 工具應用 I</span>Typeless/Gemini 指令優化與內容生成</td>
+                        <td class="bg-icon-project"><span class="day-tag">遊戲設計整合</span>程式邏輯、除錯與第一階段成果展示</td>
+                    </tr>
+                    <tr>
+                        <td class="font-black text-purple-700 break-time text-center">12:00~13:00</td>
+                        <td colspan="2" class="break-time text-center">
+                            <span class="day-tag text-purple-600 !mb-0">午餐時間</span>
+                            <span class="text-xs text-purple-800">休息與用餐</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-black text-purple-700 bg-purple-100/50 !bg-none text-center">13:00~14:00</td>
+                        <td class="bg-icon-ai"><span class="day-tag">AI 科技素養 II</span>AI 偏見討論、防護罩概念</td>
+                        <td class="bg-icon-tool"><span class="day-tag">AI網頁專案 I</span>個人作品集架構設計</td>
+                    </tr>
+                    <tr>
+                        <td class="font-black text-purple-700 bg-purple-100/50 !bg-none text-center">14:00~15:00</td>
+                        <td class="bg-icon-tool"><span class="day-tag">AI 工具應用 II</span>Gemini 視覺素材生成體驗</td>
+                        <td class="bg-icon-tool"><span class="day-tag">AI網頁專案 II</span>個人網站建置實戰</td>
+                    </tr>
+                    <tr>
+                        <td class="font-black text-purple-700 break-time text-center">15:00~15:30</td>
+                        <td colspan="2" class="break-time text-center">
+                            <span class="day-tag text-purple-600 !mb-0">桌遊 / 點心時間 (護眼)</span>
+                            <span class="text-xs text-purple-800">不插電挑戰與團隊協作</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-black text-purple-700 bg-purple-100/50 !bg-none text-center">15:30~16:15</td>
+                        <td class="bg-icon-project"><span class="day-tag">遊戲專案實作 I</span>座標系統與角色定位 (Scratch 基礎核心)</td>
+                        <td class="bg-icon-tool"><span class="day-tag">AI數位策展</span>網頁發布與功能整合</td>
+                    </tr>
+                    <tr>
+                        <td class="font-black text-purple-700 bg-purple-100/50 !bg-none text-center">16:15~17:00</td>
+                        <td class="bg-icon-project"><span class="day-tag">遊戲專案實作 II</span>事件驅動與互動控制</td>
+                        <td class="bg-icon-result"><span class="day-tag">成果結案</span>作品發表與成果分享</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="photo-footer">
+            <img src="images/第三頁底.png" alt="氛圍照">
+            <div class="absolute bottom-2 right-10 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-md text-slate-700 text-[11px] italic font-bold z-10 border border-purple-100 shadow-sm">※ 課程內容將依學員進度彈性調整，確保最佳學習效果.</div>
+        </div>
+    </div>
+
+    <div class="page-wrapper flex-col" id="page4" style="background: linear-gradient(to bottom, #e9d5ff 0%, #fdf4ff 100%) !important;">
+        <div class="w-full p-[50px_70px] z-10 flex flex-col justify-between h-full">
+            <div class="flex items-center gap-4 mb-2">
+                <div class="h-10 w-2 bg-cyan-400 rounded-none shadow-[0_0_15px_rgba(34,211,238,0.4)]"></div>
+                <h2 class="text-4xl text-slate-900 font-black tracking-tight">立即加入營隊：報名資訊</h2>
+            </div>
+
+            <div class="grid grid-cols-12 gap-8 flex-1 text-slate-800 py-4">
+                <div class="col-span-7 flex flex-col gap-6">
+                    <h4 class="text-purple-600 font-black text-xs uppercase tracking-[0.2em]">Camp Sessions & Locations / 梯次與地點</h4>
+                    
+                    <div class="info-card flex items-center justify-between p-6 bg-white hover:bg-purple-50/50 transition-all">
+                        <div class="flex-1 border-r border-purple-200 pr-6">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="bg-purple-500 text-white px-3 py-0.5 rounded-sm font-black text-xs shadow-sm">第一梯：北車場</span>
+                                <span class="text-purple-600 font-bold text-sm tracking-wide">7/04 - 7/05</span>
+                            </div>
+                            <h3 class="text-2xl font-black mb-2 text-slate-900">【北車場】</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-2">台北市中正區漢口街一段71號</p>
+                            <p class="text-purple-600 text-xs font-bold italic">時段：08:30 - 17:00 (提供延拖服務)</p>
+                        </div>
+                        <div class="ml-6 shrink-0">
+                            <div class="w-36 h-36 map-box flex items-center justify-center p-0 overflow-hidden border-none">
+                                <img src="images/台北地圖1.png" alt="北車場地圖" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card flex items-center justify-between p-6 bg-white hover:bg-purple-50/50 transition-all">
+                        <div class="flex-1 border-r border-purple-200 pr-6">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="bg-purple-500 text-white px-3 py-0.5 rounded-sm font-black text-xs shadow-sm">第二梯：敦化場</span>
+                                <span class="text-purple-600 font-bold text-sm tracking-wide">7/18 - 7/19</span>
+                            </div>
+                            <h3 class="text-2xl font-black mb-2 text-slate-900">【敦化場】</h3>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-2">台北市大安區忠孝東路四段169號 8 樓之 1</p>
+                            <p class="text-purple-600 text-xs font-bold italic">時段：08:30 - 17:00 (提供延拖服務)</p>
+                        </div>
+                        <div class="ml-6 shrink-0">
+                           <div class="w-36 h-36 map-box flex items-center justify-center p-0 overflow-hidden border-none">
+                                <img src="images/台北地圖2.png" alt="北車場地圖" class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-5 flex flex-col gap-6">
+                    <div class="info-card relative overflow-hidden bg-white">
+                        <h4 class="text-purple-600 font-black text-xs mb-6 uppercase tracking-widest">營隊收費</h4>
+                        
+                        <div class="flex items-baseline justify-between mb-2">
+                            <span class="text-sm font-bold italic text-slate-500">原價</span>
+                            <span class="text-xl font-bold line-through text-slate-400">$ 6,500</span>
+                        </div>
+
+                        <div class="bg-gradient-to-r from-purple-100 to-transparent p-4 rounded-xl border-l-4 border-purple-400 mb-6">
+                            <div class="text-[11px] font-bold text-purple-600 mb-1">【早鳥優惠 -$600 + 兩人(含)以上團報 -$500】</div>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-sm font-bold text-slate-700">雙重優惠解鎖：</span>
+                                <span class="text-5xl font-black text-slate-900 tracking-tighter">$ 5,400</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-purple-100">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="flex h-3 w-3 relative">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-none bg-cyan-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-none h-3 w-3 bg-cyan-500"></span>
+                                </span>
+                                <p class="text-sm font-black text-purple-600 italic">曾填寫問卷 / 舊生折抵金 (-$500)</p>
+                            </div>
+                            <div class="flex items-center justify-between bg-white rounded-lg p-3 border border-purple-200 shadow-sm">
+                                <span class="text-xs font-bold text-slate-600">最終優惠價</span>
+                                <span class="text-2xl font-black text-purple-600">$ 4,900</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl rounded-tr-none rounded-bl-none p-6 flex flex-col justify-between text-slate-800 shadow-xl flex-1 border-b-[6px] border-purple-200 border-x border-t">
+                        <div class="flex justify-between items-center mb-4">
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-3"><div class="bg-green-600 text-white px-2 py-1 rounded text-[10px] font-bold shadow-sm">LINE</div><span class="font-black text-sm tracking-tight text-slate-700">@888hvxnr</span></div>
+                                <div class="flex items-center gap-3"><div class="bg-pink-600 text-white px-2 py-1 rounded text-[10px] font-bold shadow-sm">IG</div><span class="font-black text-sm tracking-tight text-slate-700">image.lab365</span></div>
+                            </div>
+                            <div class="text-center group">
+                                <a href="https://forms.gle/MATduYiXmwrSyniq6" target="_blank" class="w-24 h-24 bg-white border-2 border-purple-200 rounded-xl p-1.5 shadow-sm mb-2 group-hover:scale-110 transition-transform flex items-center justify-center cursor-pointer overflow-hidden">
+                                    <img src="images/報名QRcode.png" alt="QR" class="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all">
+                                </a>
+                                <p class="font-black text-[10px] text-purple-600 uppercase tracking-widest">掃描後即可報名</p>
+                            </div>
+                        </div>
+                        <div class="pt-4 border-t border-purple-100">
+                            <p class="font-black text-lg leading-tight">準備好讓孩子驚艷世界了嗎？<br><span class="text-purple-600 text-2xl">我們在實驗室等你。</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-2">
+                <p class="text-slate-500 text-[10px] font-bold tracking-wide">※ 費用包含專業講師、高效能筆電租借、教材、保險及客製實體成果贈品</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed bottom-6 right-4 lg:right-8 z-[100] flex flex-col gap-3 print:hidden">
+        <a href="https://line.me/R/ti/p/%40888hvxnr" target="_blank" title="加入官方 LINE" class="flex items-center justify-center w-12 h-12 bg-[#00B900] text-white rounded-full shadow-[0_4px_15px_rgba(0,185,0,0.3)] hover:scale-110 transition-transform group relative cursor-pointer">
+            <span class="text-white font-black text-2xl" style="font-family: Arial, sans-serif;">L</span>
+            <span class="absolute right-14 bg-white text-slate-700 border border-slate-200 shadow-sm text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none lg:block hidden font-bold">官方 LINE</span>
+        </a>
+        
+        <a href="https://imaginationlab.com.tw/" title="回官網首頁" class="flex items-center justify-center w-12 h-12 bg-sky-500 text-white rounded-full shadow-[0_4px_15px_rgba(14,165,233,0.4)] hover:scale-110 transition-transform group relative cursor-pointer border border-sky-400">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+              <path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.99 8.99a.75.75 0 1 1-1.06 1.061l-4.69-4.69V21a.75.75 0 0 1-.75.75h-3.6a.75.75 0 0 1-.75-.75v-5.6a.25.25 0 0 0-.25-.25h-2.1a.25.25 0 0 0-.25.25V21a.75.75 0 0 1-.75.75H4.28a.75.75 0 0 1-.75-.75V9.201l-4.69 4.69a.75.75 0 0 1-1.06-1.061l8.99-8.99Z" />
+            </svg>
+            <span class="absolute right-14 bg-white text-slate-700 border border-slate-200 shadow-sm text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none lg:block hidden font-bold">回官網首頁</span>
+        </a>
+    </div>
+</body>
+</html>
