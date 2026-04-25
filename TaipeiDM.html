@@ -177,6 +177,15 @@
             #page4 .bg-white > div:first-child { flex-direction: column !important; gap: 20px !important; }
             #page4 .bg-white .space-y-4 { display: flex; flex-direction: column; align-items: center; width: 100%; }
         }
+        /* --- 以下為新增的地圖放大功能 CSS --- */
+        .map-box { cursor: pointer; transition: transform 0.2s; }
+        .map-box:hover { transform: scale(1.02); }
+        #map-lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; cursor: zoom-out;
+        }
+        #lightbox-img { max-width: 90%; max-height: 90%; border-radius: 8px; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
+        .close-hint { position: absolute; top: 20px; right: 20px; color: white; font-weight: bold; font-size: 14px; background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; }
     </style>
 </head>
 <body>
@@ -380,7 +389,7 @@
                             <p class="text-purple-600 text-xs font-bold italic">時段：08:30 - 17:00 (提供延拖服務)</p>
                         </div>
                         <div class="ml-6 shrink-0">
-                            <div class="w-36 h-36 map-box flex items-center justify-center p-0 overflow-hidden border-none">
+                            <div class="w-36 h-36 map-box flex items-center justify-center p-0 overflow-hidden border-none" onclick="openMap('images/台北地圖1.png')">
                                 <img src="images/台北地圖1.png" alt="北車場地圖" class="w-full h-full object-cover">
                             </div>
                         </div>
@@ -397,8 +406,8 @@
                             <p class="text-purple-600 text-xs font-bold italic">時段：08:30 - 17:00 (提供延拖服務)</p>
                         </div>
                         <div class="ml-6 shrink-0">
-                           <div class="w-36 h-36 map-box flex items-center justify-center p-0 overflow-hidden border-none">
-                                <img src="images/台北地圖2.png" alt="北車場地圖" class="w-full h-full object-cover">
+                           <div class="w-36 h-36 map-box flex items-center justify-center p-0 overflow-hidden border-none" onclick="openMap('images/您的敦化地圖檔名.png')">
+                                <img src="images/台北地圖2.png" alt="敦化場地圖" class="w-full h-full object-cover">
                             </div>
                         </div>
                     </div>
@@ -475,5 +484,25 @@
             <span class="absolute right-14 bg-white text-slate-700 border border-slate-200 shadow-sm text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none lg:block hidden font-bold">回官網首頁</span>
         </a>
     </div>
+    <div id="map-lightbox" onclick="closeMap()">
+        <span class="close-hint">點擊任何地方關閉</span>
+        <img id="lightbox-img" src="" alt="地圖放大檢視">
+    </div>
+
+    <script>
+        function openMap(src) {
+            const lightbox = document.getElementById('map-lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // 防止背景滾動
+        }
+
+        function closeMap() {
+            const lightbox = document.getElementById('map-lightbox');
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto'; // 恢復背景滾動
+        }
+    </script>
 </body>
 </html>
