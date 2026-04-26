@@ -159,13 +159,24 @@
             .page-wrapper { margin: 0 !important; box-shadow: none !important; page-break-after: always !important; border: none !important; }
         }
         /* 手機版響應式 */
+        /* 手機版響應式 */
         @media (max-width: 1024px) {
             .page-wrapper { width: 95% !important; height: auto !important; flex-direction: column !important; margin: 0 auto 30px auto !important; border-radius: 20px !important; }
             .page-wrapper > div { flex: none !important; width: 100% !important; }
             .glow { width: 100vw !important; height: 100vw !important; }
+            
             #page1 > div:first-child { padding: 30px 20px !important; }
-            #page2 > div.flex-1 { padding: 30px 20px !important; flex-direction: column !important; }
-            #page3 > div:first-child { padding: 30px 20px 80px 20px !important; }
+            
+            /* 解除 page2 內部容器的隱藏限制，避免內容被裁切 */
+            #page2 > div.flex-1 { padding: 30px 20px !important; flex-direction: column !important; overflow: visible !important; }
+            
+            /* --- 修正：第二頁 Venn 圖等比例縮小，適應小手機 --- */
+            .venn-container { transform: scale(0.8) !important; transform-origin: center top !important; margin: 0 auto -40px auto !important; }
+            
+            /* --- 修正：第三頁課表改為可橫向滑動 --- */
+            #page3 > div:first-child { padding: 30px 20px 80px 20px !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
+            .schedule-table-taipei { min-width: 600px !important; } 
+
             #page4 > div.w-full { padding: 30px 20px !important; }
             #page4 .grid-cols-12 { display: flex !important; flex-direction: column !important; gap: 20px !important; } 
             #page4 .info-card { flex-direction: column !important; text-align: center !important; gap: 15px !important; }
