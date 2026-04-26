@@ -165,17 +165,20 @@
             .page-wrapper > div { flex: none !important; width: 100% !important; }
             .glow { width: 100vw !important; height: 100vw !important; }
             
+            /* --- 【修正：第一頁紅圈處文字擠壓】改為單欄直排 --- */
             #page1 > div:first-child { padding: 30px 20px !important; }
+            #page1 .grid-cols-3 { grid-template-columns: 1fr !important; gap: 15px !important; }
+            #page1 .border-t { flex-direction: column !important; align-items: flex-start !important; gap: 15px !important; }
+            #page1 .border-t > div.flex { flex-direction: column !important; gap: 10px !important; }
+            #page1 .text-right { text-align: left !important; }
             
-            /* 解除 page2 內部容器的隱藏限制，避免內容被裁切 */
             #page2 > div.flex-1 { padding: 30px 20px !important; flex-direction: column !important; overflow: visible !important; }
-            
-            /* --- 修正：第二頁 Venn 圖等比例縮小，適應小手機 --- */
             .venn-container { transform: scale(0.8) !important; transform-origin: center top !important; margin: 0 auto -40px auto !important; }
             
-            /* --- 修正：第三頁課表改為可橫向滑動 --- */
+            /* --- 【修正：第三頁課表時段遮蔽】強制寬度與橫向滑動 --- */
             #page3 > div:first-child { padding: 30px 20px 80px 20px !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
-            .schedule-table-taipei { min-width: 600px !important; } 
+            .schedule-table-taipei { min-width: 650px !important; } 
+            .schedule-table-taipei th:first-child, .schedule-table-taipei td:first-child { white-space: nowrap !important; width: 90px !important; padding: 6px !important; }
 
             #page4 > div.w-full { padding: 30px 20px !important; }
             #page4 .grid-cols-12 { display: flex !important; flex-direction: column !important; gap: 20px !important; } 
