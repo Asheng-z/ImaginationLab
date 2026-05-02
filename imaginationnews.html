@@ -5,54 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>想像力實驗室 2026 暑期營隊聲明稿</title>
     <style>
-        /* 極簡公文風格設定 */
+        /* 現代輕科技風格設定 */
         body {
-            background-color: #ffffff;
+            background-color: #f8fafc; /* 非常淺的藍灰色背景，增加層次 */
             margin: 0;
-            padding: 0;
+            padding: 40px 20px;
         }
 
-        /* 文章主體 */
+        /* 文章主體改為卡片設計 */
         .news-article {
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
-            line-height: 1.6;
-            color: #000000;
+            line-height: 1.8;
+            color: #334155; /* 深灰藍色文字，比純黑色更柔和專業 */
             max-width: 750px;
-            margin: 50px auto;
-            padding: 0 20px;
+            margin: 0 auto;
+            padding: 50px 60px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid #0ea5e9; /* 頂部加入科技感的藍色邊條 */
         }
 
         /* 內文 - 標準段落 */
         p {
-            margin-bottom: 1.5em;
+            margin-bottom: 1.6em;
             text-align: justify;
+            font-size: 16px;
         }
 
-        /* 表格 - 僅使用極細黑線 */
+        /* 表格 - 現代化無粗線條設計 */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 25px 0;
+            margin: 35px 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden; /* 讓表格的圓角生效 */
         }
         th, td {
-            border: 1px solid #000000;
-            padding: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 14px 18px;
             text-align: left;
             font-size: 15px;
         }
         th {
+            background-color: #f1f5f9; /* 表頭淡淡的灰藍色 */
             font-weight: bold;
+            color: #0f172a;
         }
         
         /* 表格欄位寬度控制 */
-        /* 第一欄 (場次) 與 第二欄 (調整後價格) 強制不換行，並設定最小寬度 */
         th:nth-child(1), th:nth-child(2),
         td:nth-child(1), td:nth-child(2) {
             white-space: nowrap;
-            width: 1%; /* 讓欄位根據內容自動縮放至剛好能容納文字的寬度 */
+            width: 1%; 
         }
-        
-        /* 第三欄 (備註) 允許換行，佔據剩餘空間 */
         td:nth-child(3) {
             white-space: normal;
         }
@@ -60,39 +67,55 @@
         /* 列表 */
         ul {
             padding-left: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            background-color: #f8fafc;
+            padding: 20px 20px 20px 40px;
+            border-radius: 8px;
+            border-left: 4px solid #94a3b8;
         }
         li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         /* 署名與日期 */
         .signature {
-            margin-top: 40px;
+            margin-top: 50px;
             text-align: right;
             line-height: 1.6;
+            font-weight: bold;
+            color: #0f172a;
         }
 
         /* 底部導覽列/返回按鈕 */
         .nav-bar {
-            margin-top: 60px;
-            padding-top: 20px;
-            border-top: 1px dashed #cccccc;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #e2e8f0;
             text-align: center;
         }
         .back-btn {
             display: inline-block;
-            color: #333333;
+            color: #ffffff;
+            background-color: #0ea5e9;
             text-decoration: none;
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
-            font-size: 14px;
-            border: 1px solid #cccccc;
-            padding: 8px 16px;
-            border-radius: 4px;
-            transition: background-color 0.2s;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 10px 24px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.2);
         }
         .back-btn:hover {
-            background-color: #f0f0f0;
+            background-color: #0284c7;
+            transform: translateY(-1px);
+        }
+
+        /* 手機版適應 */
+        @media (max-width: 600px) {
+            .news-article {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
@@ -148,7 +171,7 @@
         2026 年 5 月
     </div>
 
-    <!-- 返回按鈕區塊已移至底部 -->
+    <!-- 返回按鈕區塊 -->
     <div class="nav-bar">
         <a href="index.html" class="back-btn">返回想像力實驗室首頁</a>
     </div>
