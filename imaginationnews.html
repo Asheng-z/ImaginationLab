@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>想像力實驗室 2026 暑期營隊聲明稿</title>
     <style>
+        /* 基礎設定與修復邊距溢出 */
+        * {
+            box-sizing: border-box;
+        }
+
         /* 現代輕科技風格設定 */
         body {
             background-color: #f8fafc;
@@ -26,6 +31,16 @@
             border-top: 5px solid #0ea5e9;
         }
 
+        /* 右上角 Logo 區塊 */
+        .article-logo {
+            text-align: right;
+            margin-bottom: 25px;
+        }
+        .article-logo img {
+            height: 55px; /* 控制 Logo 大小 */
+            width: auto;
+        }
+
         /* 內文 - 標準段落 */
         p {
             margin-bottom: 1.6em;
@@ -41,13 +56,14 @@
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             overflow: hidden;
+            word-break: break-word;
         }
         th, td {
             border: 1px solid #e2e8f0;
             padding: 14px 18px;
             text-align: left;
             font-size: 15px;
-            vertical-align: top; /* 讓文字靠上對齊，避免懸空 */
+            vertical-align: top;
         }
         th {
             background-color: #f1f5f9;
@@ -116,8 +132,17 @@
            手機版專屬適應 (RWD)
            ========================================= */
         @media (max-width: 600px) {
+            body {
+                padding: 20px 15px;
+            }
             .news-article {
                 padding: 30px 20px;
+            }
+            .article-logo {
+                margin-bottom: 20px;
+            }
+            .article-logo img {
+                height: 40px; /* 手機版 Logo 稍微縮小 */
             }
             
             /* 將表格轉換為卡片式排列，解決拉長變形問題 */
@@ -126,7 +151,7 @@
                 width: 100% !important;
             }
             thead tr {
-                display: none; /* 在手機上隱藏電腦版的橫向表頭 */
+                display: none; 
             }
             tr {
                 margin-bottom: 20px;
@@ -138,8 +163,8 @@
             td {
                 border: none !important;
                 border-bottom: 1px solid #e2e8f0 !important;
-                padding: 12px 16px !important;
-                white-space: normal !important; /* 解除不換行的限制 */
+                padding: 15px 16px !important;
+                white-space: normal !important; 
             }
             td:last-child {
                 border-bottom: none !important;
@@ -162,6 +187,11 @@
 <body>
 
 <div class="news-article">
+    <!-- 右上角 Logo -->
+    <div class="article-logo">
+        <img src="images/logo.png" alt="想像力實驗室 Logo">
+    </div>
+
     <p>各位家長您好，我是「想像力實驗室」的創辦人 Jonathan。</p>
     
     <p>工作室成立至今邁入第五年，這段日子以來，我們最珍視的始終是看著孩子寫下第一段程式、展示親手製作的遊戲時，那份自信且驕傲的眼神。</p>
