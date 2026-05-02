@@ -358,6 +358,9 @@
     </div>
 
     <div class="page-wrapper flex-col" id="page4" style="background: linear-gradient(to bottom, #fed7aa 0%, #fff7ed 100%) !important;">
+        <!-- 新增：右上角更新日期 -->
+        <div class="absolute top-8 right-10 text-orange-900/40 text-xs font-bold tracking-widest z-20">更新日期2026年5月2日</div>
+
         <div class="w-full p-[50px_70px] z-10 flex flex-col justify-between h-full">
             <div class="flex items-center gap-4 mb-2">
                 <div class="h-10 w-2 bg-orange-400 rounded-none shadow-[0_0_15px_rgba(249,115,22,0.4)]"></div>
@@ -404,30 +407,19 @@
                 </div>
 
                 <div class="col-span-5 flex flex-col gap-6">
-                    <div class="info-card relative overflow-hidden bg-white">
-                        <h4 class="text-orange-600 font-black text-xs mb-6 uppercase tracking-widest">營隊收費</h4>
-                        <div class="flex items-baseline justify-between mb-2">
-                            <span class="text-sm font-bold italic text-slate-500">原價</span>
-                            <span class="text-xl font-bold line-through text-slate-400">$ 6,100</span>
+                    <div class="info-card relative overflow-hidden bg-white flex flex-col justify-center">
+                        <h4 class="text-orange-600 font-black text-xs mb-5 uppercase tracking-widest">營隊收費</h4>
+                        
+                        <div class="flex items-baseline justify-between mb-4">
+                            <span class="text-sm font-bold italic text-slate-500">原定優惠價</span>
+                            <span class="text-2xl font-bold line-through text-slate-400">$ 4,500</span>
                         </div>
-                        <div class="bg-gradient-to-r from-orange-100 to-transparent p-4 rounded-xl border-l-4 border-orange-400 mb-6">
-                            <div class="text-[11px] font-bold text-orange-600 mb-1">【早鳥優惠 -$600 + 兩人(含)以上團報 -$500】</div>
+
+                        <div class="bg-gradient-to-r from-orange-100 to-transparent p-5 rounded-xl border-l-4 border-orange-400">
+                            <div class="text-xs font-bold text-orange-600 mb-2 tracking-wide">最終調整價格</div>
                             <div class="flex items-baseline gap-2">
-                                <span class="text-sm font-bold text-slate-700">雙重優惠解鎖：</span>
-                                <span class="text-5xl font-black text-slate-900 tracking-tighter">$ 5,000</span>
-                            </div>
-                        </div>
-                        <div class="pt-4 border-t border-orange-100">
-                            <div class="flex items-center gap-2 mb-2">
-                                <span class="flex h-3 w-3 relative">
-                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-none bg-orange-400 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-none h-3 w-3 bg-orange-500"></span>
-                                </span>
-                                <p class="text-sm font-black text-orange-600 italic">曾填寫問卷 / 舊生折抵金 (-$500)</p>
-                            </div>
-                            <div class="flex items-center justify-between bg-white rounded-lg p-3 border border-orange-200 shadow-sm">
-                                <span class="text-xs font-bold text-slate-600">最終優惠價</span>
-                                <span class="text-2xl font-black text-orange-600">$ 4,500</span>
+                                <span class="text-sm font-bold text-slate-700">單人報名費：</span>
+                                <span class="text-5xl font-black text-slate-900 tracking-tighter">$ 4,000</span>
                             </div>
                         </div>
                     </div>
@@ -452,20 +444,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div id="map-lightbox" onclick="closeMap()">
-        <span class="close-hint">點擊任何地方關閉</span>
-        <img id="lightbox-img" src="" alt="地圖放大檢視">
-    </div>
-
-    <div class="fixed bottom-6 right-4 lg:right-8 z-[100] flex flex-col gap-3 print:hidden">
-        <a href="https://line.me/R/ti/p/%40888hvxnr" target="_blank" class="flex items-center justify-center w-12 h-12 bg-[#00B900] text-white rounded-full shadow-[0_4px_15px_rgba(0,185,0,0.3)] hover:scale-110 transition-transform group relative cursor-pointer">
-            <span class="text-white font-black text-2xl" style="font-family: Arial, sans-serif;">L</span>
-        </a>
-        <a href="https://imaginationlab.com.tw/" class="flex items-center justify-center w-12 h-12 bg-orange-500 text-white rounded-full shadow-[0_4px_15px_rgba(249,115,22,0.4)] hover:scale-110 transition-transform group relative cursor-pointer border border-orange-400">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M11.47 3.841a.75.75 0 0 1 1.06 0l8.99 8.99a.75.75 0 1 1-1.06 1.061l-4.69-4.69V21a.75.75 0 0 1-.75.75h-3.6a.75.75 0 0 1-.75-.75v-5.6a.25.25 0 0 0-.25-.25h-2.1a.25.25 0 0 0-.25.25V21a.75.75 0 0 1-.75.75H4.28a.75.75 0 0 1-.75-.75V9.201l-4.69 4.69a.75.75 0 0 1-1.06-1.061l8.99-8.99Z" /></svg>
-        </a>
     </div>
 
     <script>
