@@ -37,9 +37,10 @@
             margin-bottom: 25px;
         }
         .article-logo img {
-            height: 55px; /* 控制 Logo 大小 */
+            height: 55px; 
             width: auto;
-            filter: brightness(0) opacity(0.8);
+            /* 強制把白底 Logo 變成深黑色，並帶一點柔和透明度 */
+            filter: brightness(0) opacity(0.8); 
         }
 
         /* 內文 - 標準段落 */
@@ -104,13 +105,21 @@
             color: #0f172a;
         }
 
-        /* 底部導覽列/返回按鈕 */
+        /* =========================================
+           底部導覽列/按鈕區塊
+           ========================================= */
         .nav-bar {
             margin-top: 50px;
             padding-top: 30px;
             border-top: 1px solid #e2e8f0;
-            text-align: center;
+            display: flex;
+            justify-content: space-between; /* 讓左右兩側分開 */
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
+
+        /* 主按鈕 (返回首頁) */
         .back-btn {
             display: inline-block;
             color: #ffffff;
@@ -129,6 +138,31 @@
             transform: translateY(-1px);
         }
 
+        /* 右側副按鈕容器 */
+        .nav-right-btns {
+            display: flex;
+            gap: 12px;
+        }
+
+        /* 副按鈕 (營隊簡章)，大小約為主按鈕一半 */
+        .small-btn {
+            display: inline-block;
+            color: #0ea5e9;
+            background-color: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            text-decoration: none;
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            font-size: 13px; /* 字體較小 */
+            font-weight: bold;
+            padding: 6px 12px; /* 留白較小 */
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        .small-btn:hover {
+            background-color: #0ea5e9;
+            color: #ffffff;
+        }
+
         /* =========================================
            手機版專屬適應 (RWD)
            ========================================= */
@@ -143,10 +177,10 @@
                 margin-bottom: 20px;
             }
             .article-logo img {
-                height: 40px; /* 手機版 Logo 稍微縮小 */
+                height: 40px; 
             }
             
-            /* 將表格轉換為卡片式排列，解決拉長變形問題 */
+            /* 將表格轉換為卡片式排列 */
             table, thead, tbody, th, td, tr {
                 display: block;
                 width: 100% !important;
@@ -171,16 +205,25 @@
                 border-bottom: none !important;
                 background-color: #f8fafc;
             }
-            /* 透過 CSS 偽元素在手機版自動加入小標題 */
             td:nth-child(1)::before { content: "場次："; font-weight: bold; color: #0ea5e9; display: block; margin-bottom: 4px; font-size: 13px;}
             td:nth-child(2)::before { content: "調整後價格："; font-weight: bold; color: #0ea5e9; display: block; margin-bottom: 4px; font-size: 13px;}
             td:nth-child(3)::before { content: "備註："; font-weight: bold; color: #0ea5e9; display: block; margin-bottom: 4px; font-size: 13px;}
             
-            /* 調整價格字體凸顯 */
             td:nth-child(2) {
                 font-size: 18px;
                 font-weight: bold;
                 color: #0f172a;
+            }
+
+            /* 手機版導覽列按鈕自動換行置中 */
+            .nav-bar {
+                flex-direction: column;
+                justify-content: center;
+                gap: 20px;
+            }
+            .nav-right-btns {
+                justify-content: center;
+                flex-wrap: wrap;
             }
         }
     </style>
@@ -212,12 +255,12 @@
         <tbody>
             <tr>
                 <td>台北場</td>
-                <td>4,000 元（原定優惠價4,500 元）</td>
+                <td>4,000 元<p>（原定優惠價4,500 元）</p></td>
                 <td>此為包含午餐、保險、設備租借及悠遊卡工本費的全包式費用，不需任何額外條件，填表即享，無其他衍生費用。</td>
             </tr>
             <tr>
                 <td>新竹場</td>
-                <td>5,600 元（原定優惠價6,500 元）</td>
+                <td>5,600 元<p>（原定優惠價6,500 元）</p></td>
                 <td>此為包含保險、設備租借及悠遊卡工本費的全包式費用，不需任何額外條件，填表即享，無其他衍生費用。</td>
             </tr>
         </tbody>
@@ -242,9 +285,13 @@
         2026 年 5 月
     </div>
 
-    <!-- 返回按鈕區塊 -->
+    <!-- 底部按鈕區塊 -->
     <div class="nav-bar">
         <a href="index.html" class="back-btn">返回想像力實驗室首頁</a>
+        <div class="nav-right-btns">
+            <a href="TaipeiDM.html" class="small-btn">點擊前往台北營隊簡章</a>
+            <a href="DM0410.html" class="small-btn">點擊前往新竹營隊簡章</a>
+        </div>
     </div>
 </div>
 
