@@ -7,7 +7,7 @@
     <style>
         /* 現代輕科技風格設定 */
         body {
-            background-color: #f8fafc; /* 非常淺的藍灰色背景，增加層次 */
+            background-color: #f8fafc;
             margin: 0;
             padding: 40px 20px;
         }
@@ -16,14 +16,14 @@
         .news-article {
             font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
             line-height: 1.8;
-            color: #334155; /* 深灰藍色文字，比純黑色更柔和專業 */
+            color: #334155;
             max-width: 750px;
             margin: 0 auto;
             padding: 50px 60px;
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            border-top: 5px solid #0ea5e9; /* 頂部加入科技感的藍色邊條 */
+            border-top: 5px solid #0ea5e9;
         }
 
         /* 內文 - 標準段落 */
@@ -40,21 +40,22 @@
             margin: 35px 0;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
-            overflow: hidden; /* 讓表格的圓角生效 */
+            overflow: hidden;
         }
         th, td {
             border: 1px solid #e2e8f0;
             padding: 14px 18px;
             text-align: left;
             font-size: 15px;
+            vertical-align: top; /* 讓文字靠上對齊，避免懸空 */
         }
         th {
-            background-color: #f1f5f9; /* 表頭淡淡的灰藍色 */
+            background-color: #f1f5f9;
             font-weight: bold;
             color: #0f172a;
         }
         
-        /* 表格欄位寬度控制 */
+        /* 電腦版表格欄位寬度控制 */
         th:nth-child(1), th:nth-child(2),
         td:nth-child(1), td:nth-child(2) {
             white-space: nowrap;
@@ -111,10 +112,49 @@
             transform: translateY(-1px);
         }
 
-        /* 手機版適應 */
+        /* =========================================
+           手機版專屬適應 (RWD)
+           ========================================= */
         @media (max-width: 600px) {
             .news-article {
                 padding: 30px 20px;
+            }
+            
+            /* 將表格轉換為卡片式排列，解決拉長變形問題 */
+            table, thead, tbody, th, td, tr {
+                display: block;
+                width: 100% !important;
+            }
+            thead tr {
+                display: none; /* 在手機上隱藏電腦版的橫向表頭 */
+            }
+            tr {
+                margin-bottom: 20px;
+                border: 1px solid #0ea5e9;
+                border-radius: 8px;
+                background-color: #ffffff;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            }
+            td {
+                border: none !important;
+                border-bottom: 1px solid #e2e8f0 !important;
+                padding: 12px 16px !important;
+                white-space: normal !important; /* 解除不換行的限制 */
+            }
+            td:last-child {
+                border-bottom: none !important;
+                background-color: #f8fafc;
+            }
+            /* 透過 CSS 偽元素在手機版自動加入小標題 */
+            td:nth-child(1)::before { content: "場次："; font-weight: bold; color: #0ea5e9; display: block; margin-bottom: 4px; font-size: 13px;}
+            td:nth-child(2)::before { content: "調整後價格："; font-weight: bold; color: #0ea5e9; display: block; margin-bottom: 4px; font-size: 13px;}
+            td:nth-child(3)::before { content: "備註："; font-weight: bold; color: #0ea5e9; display: block; margin-bottom: 4px; font-size: 13px;}
+            
+            /* 調整價格字體凸顯 */
+            td:nth-child(2) {
+                font-size: 18px;
+                font-weight: bold;
+                color: #0f172a;
             }
         }
     </style>
