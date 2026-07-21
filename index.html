@@ -73,10 +73,15 @@
 
     /* --- 主視覺標題 (Hero) --- */
     header.hero { text-align: center; padding: 100px 0 80px 0; }
+/* --- 主視覺標題 (Hero) 字體顏色加深與放大 --- */
     header.hero h1 {
-      font-size: 2.5rem; letter-spacing: 2px; margin: 0;
-      background: linear-gradient(135deg, #ffffff 0%, #ffd700 50%, var(--accent-color) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      font-size: 2.8rem; /* 稍微放大字體 */
+      letter-spacing: 2px; 
+      margin: 0;
+      background: none; /* 移除原本的漸層 */
+      -webkit-text-fill-color: initial; /* 恢復原本的文字顏色填充 */
+      color: #222222; /* 改用深灰色，確保絕對清晰 */
+      text-shadow: 0 4px 15px rgba(255, 126, 51, 0.2); /* 加上一點溫暖的淡光暈 */
     }
 
     /* --- 內容區塊卡片化 (去除毛玻璃，改為乾淨白底與輕陰影) --- */
@@ -282,7 +287,7 @@
       <h2>最新消息</h2>
 
       <div class="news-item">
-        <span class="news-tag">📍 暑期營隊報名已結束！</span>
+        <span class="news-tag"> 📅暑期營隊進行中</span>
       
       <div class="news-item">
         <span class="news-tag">📍 2026台北暑期營隊</span>
