@@ -11,36 +11,36 @@
   <style>
     /* --- 核心變數設定 --- */
     :root {
-      --bg-color: #0b0e14;
-      --secondary-bg: rgba(22, 27, 34, 0.6);
-      --text-color: #e6edf3;
-      --text-muted: #8b949e;
-      --accent-color: #00f2fe;
-      --accent-dark: #0056b3; 
-      --accent-glow: rgba(0, 242, 254, 0.3);
-      --gold-accent: #ffd700;
-      --border-color: rgba(48, 54, 61, 0.8);
+      --bg-color: #FFF9F2; /* 溫暖的淺米底色 */
+      --secondary-bg: rgba(255, 255, 255, 0.85); /* 卡片背景改為透白 */
+      --text-color: #333333; /* 主要文字改為深灰 */
+      --text-muted: #737373; /* 次要文字 */
+      --accent-color: #FF7E33; /* 主色調：暖橘色 */
+      --accent-dark: #D95C14;  /* 深橘色 */
+      --accent-glow: rgba(255, 126, 51, 0.2);
+      --gold-accent: #F29900;
+      --border-color: rgba(255, 126, 51, 0.2); /* 邊框帶點淡淡的橘色 */
       --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
       --container-width: 1000px;
     }
 
     html { scroll-behavior: smooth; }
 
-    /* --- 動態星雲背景 --- */
+    /* --- 動態星雲背景 (改為暖色調漸層) --- */
     body {
       background-color: var(--bg-color);
       background-image: 
-        radial-gradient(at 0% 0%, rgba(0, 242, 254, 0.05) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(162, 210, 255, 0.05) 0px, transparent 50%);
+        radial-gradient(at 0% 0%, rgba(255, 126, 51, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(242, 153, 0, 0.05) 0px, transparent 50%);
       background-attachment: fixed;
       font-family: 'Inter', 'Noto Sans TC', sans-serif;
       color: var(--text-color);
       margin: 0; padding: 0; line-height: 1.8; overflow-x: hidden;
     }
 
-    /* --- 基礎排版 --- */
+    /* --- 基礎排版 (標題與內文改為深色) --- */
     .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; }
-    h1, h2, h3, h4 { color: #fff; font-weight: 700; }
+    h1, h2, h3, h4 { color: #222222; font-weight: 700; } /* 標題改深色 */
 
     h2 {
       font-size: 2.2rem; margin-top: 60px; margin-bottom: 25px; padding-bottom: 15px;
@@ -51,11 +51,10 @@
       background-color: var(--accent-color); box-shadow: 0 0 10px var(--accent-color);
     }
 
-    h3 { font-size: 1.5rem; color: var(--accent-color); margin-top: 40px; margin-bottom: 15px;}
-    h4 { font-size: 1.2rem; color: var(--gold-accent); margin-top: 30px; margin-bottom: 10px;}
-    p { margin-bottom: 1.5rem; color: #c9d1d9; font-size: 1.05rem; }
+    h3 { font-size: 1.5rem; color: var(--accent-dark); margin-top: 40px; margin-bottom: 15px;}
+    h4 { font-size: 1.2rem; color: var(--accent-color); margin-top: 30px; margin-bottom: 10px;}
+    p { margin-bottom: 1.5rem; color: #444444; font-size: 1.05rem; } /* 內文改深色 */
     br { content: ""; display: block; margin-top: 8px; }
-
     /* --- 淺色導覽列 --- */
     nav {
       background: rgba(255, 255, 255, 0.85);
@@ -80,29 +79,47 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
 
-    /* --- 內容區塊卡片化 --- */
+    /* --- 內容區塊卡片化 (去除毛玻璃，改為乾淨白底與輕陰影) --- */
     .section {
-      background: var(--secondary-bg); backdrop-filter: blur(10px);
-      border: 1px solid var(--border-color); border-radius: 20px;
-      padding: 40px 50px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      transition: border-color 0.4s ease, transform 0.4s ease;
+      background: #ffffff; /* 乾淨的純白背景 */
+      border: 1px solid rgba(255, 126, 51, 0.15); /* 淡淡的暖橘邊框 */
+      border-radius: 20px;
+      padding: 40px 50px; 
+      margin-bottom: 40px; 
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03); /* 降低陰影濃度，增加高級感 */
+      transition: all 0.4s ease;
     }
-    .section:hover { border-color: rgba(0, 242, 254, 0.4); }
+    
+    .section:hover { 
+      border-color: rgba(255, 126, 51, 0.4); 
+      box-shadow: 0 15px 40px rgba(255, 126, 51, 0.08); /* 滑鼠移上時的暖色淡陰影 */
+      transform: translateY(-2px); /* 輕微上浮效果 */
+    }
 
-    /* --- 最新消息摘要卡片樣式 --- */
+    /* --- 最新消息摘要卡片樣式 (修正背景與文字對比) --- */
     .news-item {
       display: flex; flex-direction: column; gap: 15px; padding: 30px; margin-top: 20px;
-      background: rgba(0,0,0,0.4); border: 1px solid rgba(0, 242, 254, 0.3);
-      border-left: 5px solid var(--accent-color); border-radius: 12px;
-      transition: transform 0.3s ease, background 0.3s ease;
+      background-color: #ffffff; /* 強制設定為純白底色，解決背景太暗的問題 */
+      border: 1px solid var(--border-color); 
+      border-left: 5px solid var(--accent-color); 
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* 加上輕微陰影讓卡片浮現 */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .news-tag { background: rgba(0, 242, 254, 0.15); color: var(--accent-color); padding: 5px 12px; border-radius: 6px; font-size: 0.9rem; font-weight: 700; width: fit-content; }
-    .btn-detail {
-      display: inline-block; margin-top: 15px; padding: 10px 20px; background: rgba(255,255,255,0.1);
-      color: var(--accent-color); border: 1px solid var(--accent-color); border-radius: 6px;
-      text-decoration: none; font-weight: 600; cursor: pointer; transition: all 0.3s;
+    
+    .news-item:hover { 
+      box-shadow: 0 8px 25px rgba(255, 126, 51, 0.15); 
     }
-    .btn-detail:hover { background: var(--accent-color); color: #0b0e14; }
+    
+    /* 強制確保卡片內的標題與內文顏色清晰 */
+    .news-item h3 { 
+      color: #222222 !important; /* 強制標題為極深灰 */
+    }
+    
+    .news-item p {
+      color: #444444 !important; /* 強制內文為深灰色，在白底上最易讀 */
+      font-weight: 500;
+    }
 
     /* --- 彈窗系統 (Modal) --- */
     .modal {
@@ -126,15 +143,57 @@
 
     /* --- 其它排版優化 --- */
     .imagelabphoto { text-align: center; margin-top: 40px; }
-    .imagelabphoto img { max-width: 100%; height: auto; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); }
+    /* --- 圖片陰影優化 --- */
+    .imagelabphoto img { 
+      max-width: 100%; height: auto; border-radius: 16px; 
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.05); /* 淡化陰影 */
+      border: 1px solid rgba(0, 0, 0, 0.03); /* 取代原本的白邊框 */
+    }
+    
+    .courseimage img { 
+      max-width: 80%; border-radius: 12px; 
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* 淡化陰影 */
+    }
     .courseimage { text-align: center; margin-top: 40px; }
-    .courseimage img { max-width: 80%; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+    /* --- 圖片陰影優化 --- */
+    .imagelabphoto img { 
+      max-width: 100%; height: auto; border-radius: 16px; 
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.05); /* 淡化陰影 */
+      border: 1px solid rgba(0, 0, 0, 0.03); /* 取代原本的白邊框 */
+    }
+    
+    .courseimage img { 
+      max-width: 80%; border-radius: 12px; 
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* 淡化陰影 */
+    }
     .caption { text-align: center; color: var(--text-muted); font-size: 0.95rem; margin-top: 15px; letter-spacing: 1px; }
 
     .image-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
-    .image-column-card { background: rgba(0,0,0,0.3); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); overflow: hidden; transition: transform 0.3s ease; }
-    .image-column-card img { width: 100%; height: 220px; object-fit: cover; display: block; border-bottom: 2px solid var(--accent-color); }
-    .image-column-card .caption { padding: 15px; margin: 0; color: #fff; font-weight: 600; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); }
+    /* --- 課程進行方式的卡片優化 --- */
+    .image-column-card { 
+      background: #ffffff; /* 改為純白 */
+      border-radius: 16px; 
+      border: 1px solid rgba(0, 0, 0, 0.05); /* 淡灰色邊框 */
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04); /* 輕微陰影 */
+      overflow: hidden; 
+      transition: transform 0.3s ease; 
+    }
+    
+    .image-column-card:hover {
+      transform: translateY(-5px); /* 增加一點互動感 */
+    }
+    
+    .image-column-card img { 
+      width: 100%; height: 220px; object-fit: cover; display: block; 
+      border-bottom: 3px solid var(--accent-color); /* 保留橘色點綴線 */
+    }
+    
+    .image-column-card .caption { 
+      padding: 15px; margin: 0; 
+      color: #333333; /* 文字改深色 */
+      font-weight: 600; 
+      background: #ffffff; /* 移除原本的黑色漸層，改為純白 */
+    }
 
     #partners p { line-height: 2.2; }
     #partners b { color: var(--bg-color); background-color: var(--accent-color); padding: 3px 10px; border-radius: 6px; margin-right: 10px; font-size: 0.9rem; }
@@ -223,20 +282,10 @@
       <h2>最新消息</h2>
 
       <div class="news-item">
-        <span class="news-tag" style="background: rgba(255, 215, 0, 0.15); color: var(--gold-accent);">📢 創辦人聲明</span>
-        <h3 style="margin-top:10px; color:#fff;">好的課程值得被見證｜2026 暑期營隊費用調整</h3>
-        <p>
-          「與其在行銷包裝上多著墨，我們更在乎這套精心研發的課程能否真正走入更多孩子的視野。」為了讓科技教育的熱忱發揮最大效益，我們決定調整新竹與台北營隊的參與門檻，並鄭重承諾本梯次營隊「絕對如期開班」。
-        </p>
-        </p>
-        <button class="btn-detail" style="border-color: var(--gold-accent); color: var(--gold-accent);" onmouseover="this.style.background='var(--gold-accent)'; this.style.color='#0b0e14';" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.color='var(--gold-accent)';" onclick="window.location.href='imaginationnews.html'">閱讀完整聲明稿</button>
-      </div>
-
-      <div class="news-item">
-        <span class="news-tag">📍 暑期營隊開放報名中</span>
+        <span class="news-tag">📍 暑期營隊報名已結束！</span>
       
       <div class="news-item">
-        <span class="news-tag">📍 2026台北營隊開放報名！</span>
+        <span class="news-tag">📍 2026台北暑期營隊</span>
         <h3 style="margin-top:10px; color:#fff;">【台北限定場】AI 素養 X Scratch 遊戲工程營</h3>
         <p>
           2026 台北限定梯次（北車場 / 敦化場）正式開放報名！名額有限，點擊查看完整課表與專屬報名資訊。
@@ -245,7 +294,7 @@
       </div>
 
       <div class="news-item">
-        <span class="news-tag">🚀 2026 暑期營隊開放報名！</span>
+        <span class="news-tag">🚀 2026 新竹暑期營隊</span>
         <h3 style="margin-top:10px; color:#fff;">【新竹/竹北場】AI 素養 X Scratch 遊戲工程營</h3>
         <p>
           在《AI素養 X Scratch遊戲工程營》中，我們將帶領孩子認識 AI 的運作邏輯，建立正確的科技倫理與「駕馭科技」的核心素養。我們引導孩子掌握與 AI 溝通的方法，讓 AI 成為最強大的創作助手。
