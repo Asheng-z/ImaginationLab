@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>營隊網頁設計成果精選｜Imagination Lab</title>
+    <style>
+        :root {
+            --bg-color: #F8F9FA;
+            --card-bg: #FFFFFF;
+            --primary-text: #1A202C;
+            --secondary-text: #4A5568;
+            --accent-color: #2563EB;
+            --accent-hover: #1D4ED8;
+            --tag-bg: #EFF6FF;
+            --tag-text: #2563EB;
+            --border-color: #E2E8F0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            line-height: 1.6;
+            padding-bottom: 80px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 頂部瀏覽提示 */
+        .browser-tip {
+            background-color: #FEF3C7;
+            color: #92400E;
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 10px 16px;
+            font-weight: 500;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* 頂部橫幅 (Hero Section) */
+        .hero {
+            background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
+            color: #FFFFFF;
+            padding: 52px 20px 64px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background-color: var(--bg-color);
+            border-radius: 24px 24px 0 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            color: #93C5FD;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 999px;
+            margin-bottom: 16px;
+            backdrop-filter: blur(4px);
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: 1.85rem;
+            font-weight: 800;
+            margin-bottom: 14px;
+            line-height: 1.35;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 span {
+            color: #60A5FA;
+        }
+
+        .hero p {
+            font-size: 0.95rem;
+            color: #E2E8F0;
+            max-width: 480px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* 主要內容容器 */
+        .container {
+            max-width: 540px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* 區塊通用標題 */
+        .section-header {
+            text-align: center;
+            margin: 36px 0 24px;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary-text);
+            margin-bottom: 8px;
+        }
+
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+        }
+
+        /* ───【新增】營隊解密與課堂紀實區塊 ─── */
+        .behind-scenes {
+            background: #FFFFFF;
+            border-radius: var(--radius-lg);
+            padding: 24px 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            margin-bottom: 40px;
+        }
+
+        .philosophy-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .philosophy-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: #F8FAFC;
+            padding: 14px;
+            border-radius: var(--radius-md);
+        }
+
+        .philosophy-icon {
+            font-size: 1.5rem;
+            line-height: 1;
+            flex-shrink: 0;
+            background: #E0F2FE;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        .philosophy-text h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary-text);
+            margin-bottom: 4px;
+        }
+
+        .philosophy-text p {
+            font-size: 0.85rem;
+            color: var(--secondary-text);
+            line-height: 1.5;
+        }
+
+        /* 課堂照片展示格 (橫向滾動或兩格網格) */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .photo-item {
+            aspect-ratio: 4 / 3;
+            background-color: #E2E8F0;
+            border-radius: var(--radius-sm);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder {
+            font-size: 0.75rem;
+            color: #64748B;
+            text-align: center;
+            padding: 8px;
+        }
+
+        /* ─── 作品卡片式列表 ─── */
+        .showcase-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: transform 0.2s ease;
+            position: relative;
+        }
+
+        .card:active {
+            transform: scale(0.98);
+        }
+
+        .card-media {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            background-color: #E2E8F0;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .browser-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 28px;
+            background: rgba(241, 245, 249, 0.92);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            gap: 6px;
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            z-index: 2;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+        .dot-red { background-color: #EF4444; }
+        .dot-yellow { background-color: #F59E0B; }
+        .dot-green { background-color: #10B981; }
+
+        .browser-url {
+            font-size: 0.7rem;
+            color: #64748B;
+            margin-left: 8px;
+            font-family: monospace;
+            background: #FFFFFF;
+            padding: 1px 8px;
+            border-radius: 4px;
+            border: 1px solid #E2E8F0;
+            max-width: 65%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .media-placeholder {
+            color: #64748B;
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        .card-body {
+            padding: 24px 20px 24px;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .author {
+            font-size: 0.85rem;
+            color: var(--secondary-text);
+            font-weight: 600;
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--primary-text);
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--secondary-text);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background-color: #FFFBEB;
+            border-left: 3px solid #F59E0B;
+            padding: 8px 12px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: #92400E;
+            border-radius: 0 6px 6px 0;
+        }
+
+        /* 行動呼籲按鈕 */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background-color: var(--accent-color);
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
+            transition: background-color 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.25);
+        }
+
+        .btn:hover, .btn:active {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-icon {
+            font-size: 1.1rem;
+        }
+
+        /* ───【強力轉化】底部行動呼籲 (Footer CTA) ─── */
+        .footer-cta {
+            margin-top: 56px;
+            background: linear-gradient(135deg, #1E3A8A 0%, #0F172A 100%);
+            color: #FFFFFF;
+            padding: 40px 24px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            /* --- 新增：設定相對定位與裁切，讓浮水印不超出圓角半徑 --- */
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* --- 新增：背景 Logo 浮水印設定 --- */
+        .footer-cta::before {
+            content: '';
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%; /* 浮水印大小，可依喜好微調比例 */
+            height: 90%;
+            
+            background-image: url('images/logo反白.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.2; /* 浮水印透明度 (0.05 代表 5%，微露最具質感) */
+            z-index: -1;
+            pointer-events: none; /* 確保滑鼠點擊不會被浮水印圖層阻擋 */
+        }
+
+        .footer-cta h3 {
+            font-size: 1.45rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .footer-cta p {
+            font-size: 0.95rem;
+            color: #DBEAFE;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .cta-btn-primary {
+            display: inline-block;
+            width: 100%;
+            background-color: #22C55E;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 800;
+            padding: 16px 24px;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.3);
+            margin-bottom: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .cta-btn-primary:hover {
+            background-color: #16A34A;
+        }
+
+        .cta-btn-secondary {
+            display: inline-block;
+            color: #93C5FD;
+            font-size: 0.9rem;
+            text-decoration: underline;
+            padding: 8px;
+        }
+
+        /* 響應式微調 */
+        @media (min-width: 600px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.05rem; }
+            .photo-gallery { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 頂部視覺與引言 -->
+    <header class="hero">
+        <div class="badge">💡想像力實驗室</div>
+        <h1>AI素養 X Scratch遊戲工程營<br><span>學生作品網頁成果精選</span></h1>
+        <p>零基礎也能掌握 AI 時代的超能力！看看孩子們如何從理解 AI 基礎邏輯開始，結合想像力與創造力，打造出超乎想像的個人網頁成果。</p>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="container">
+
+        <!-- ─── 1. 營隊紀實與學習解密 (信任感建立) ─── -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">🌟 個人專屬網頁是怎麼誕生的？</h2>
+                <p class="section-subtitle">從遊戲邏輯、AI 應用到網頁策展，展現孩子 100% 的真實創意</p>
+            </div>
+
+            <div class="behind-scenes">
+                <div class="philosophy-grid">
+                    <div class="philosophy-item">
+                        <div class="philosophy-icon">🎯</div>
+                        <div class="philosophy-text">
+                            <h4>Scratch 遊戲程式設計</h4>
+                            <p>讓孩子變身小工程師！從遊戲規則規劃、角色造型到變數設定，親手設計出能玩、能互動的有趣創意作品。</p>
+                        </div>
+                    </div>
+                    <div class="philosophy-item">
+                        <div class="philosophy-icon">👨🏻‍💻</div>
+                        <div class="philosophy-text">
+                            <h4>擁抱 AI 未來科技素養</h4>
+                            <p>揭開生成式 AI 的神秘面紗！理解並學習如何正確與AI工具對話、訓練模型，讓AI工具成為孩子探索世界的最佳利器。</p>
+                        </div>
+                    </div>
+                    <div class="philosophy-item">
+                        <div class="philosophy-icon">🌐</div>
+                        <div class="philosophy-text">
+                            <h4>專屬網站設計與建構</h4>
+                            <p>打造個人數位網頁！學會網站架構規劃與視覺排版，將暑期學習成果彙整成專屬網頁，建立自信的創作履歷。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 課堂實況照片牆  -->
+                <div class="photo-gallery">
+                    <div class="photo-item">
+                        <!-- <img src="課堂照片網址_1.jpg" alt="專注思考"> -->
+                        <div class="photo-placeholder">📸 [插入課堂實拍：專注討論神情]</div>
+                    </div>
+                    <div class="photo-item">
+                        <!-- <img src="課堂照片網址_2.jpg" alt="手繪草圖"> -->
+                        <div class="photo-placeholder">📸 [插入課堂實拍：繪製網站架構圖]</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── 2. 精選 3 大代表作品 (成果展示) ─── -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">🌐 精選 學生作品網頁範例</h2>
+                <p class="section-subtitle">點擊下方按鈕，直接前往造訪小學生親手經營的數位宇宙</p>
+            </div>
+
+            <div class="showcase-grid">
+
+                <!-- 作品卡片 1 -->
+                <article class="card">
+                    <div class="card-media">
+                        <div class="browser-header">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                        </div>
+                        <!-- <img src="圖片網址_1.gif" alt="作品名稱"> -->
+                        <img src="網站縮圖1.png" alt="學生作品預覽">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="tag">個人網站首頁</span>
+                            <span class="author">Euric ｜ 小學五年級</span>
+                        </div>
+                        <h2 class="card-title">Euric的遊戲作品集</h2>
+                        <div class="highlight-box">
+                            🌟 <b>成長亮點：</b>原本只是個超愛玩遊戲的小玩家，在搞懂遊戲與網頁設計的程式邏輯後分享：「原來自己親手設計作品的成就感，比單純打遊戲還要過癮！」
+                        </div>
+                        <a href="https://imglab365.github.io/SummerCamp/camp03/03/index.html" target="_blank" class="btn">
+                            <span class="btn-icon">🌐</span> 前往造訪 / 欣賞專屬網頁
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 作品卡片 2 -->
+                <article class="card">
+                    <div class="card-media">
+                        <div class="browser-header">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                        </div>
+                        <!-- <img src="圖片網址_2.gif" alt="作品名稱"> -->
+                        <img src="網站縮圖2.png" alt="學生作品預覽">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="tag">個人介紹錦集</span>
+                            <span class="author">Yue ｜ 小學四年級 (零基礎)</span>
+                        </div>
+                        <h2 class="card-title">Yue的數位個人網站</h2>
+                        <div class="highlight-box">
+                            🌟 <b>成長亮點：</b>從一開始的盲目亂試，到理解 AI 基礎原理後，終於掌握了下指令（Prompt）的邏輯與秘訣，成功引導 AI 生成出完全符合心中想像的獨特網頁風格！
+                        </div>
+                        <a href="https://imglab365.github.io/SummerCamp/camp01/02/index.html" target="_blank" class="btn">
+                            <span class="btn-icon">🌐</span> 前往造訪 / 欣賞專屬網頁
+                        </a>
+                    </div>
+                </article>
+
+                <!-- 作品卡片 3 -->
+                <article class="card">
+                    <div class="card-media">
+                        <div class="browser-header">
+                            <span class="dot dot-red"></span>
+                            <span class="dot dot-yellow"></span>
+                            <span class="dot dot-green"></span>
+                        </div>
+                        <!-- <img src="圖片網址_3.gif" alt="作品名稱"> -->
+                        <img src="網站縮圖3.png" alt="學生作品預覽">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-meta">
+                            <span class="tag">遊戲設計的作品集</span>
+                            <span class="author">小嗡 ｜ 小學四年級 </span>
+                        </div>
+                        <h2 class="card-title">小嗡自己做的網站</h2>
+                        <div class="highlight-box">
+                            🌟 <b>成長亮點：</b>帶著基礎來挑戰！經過老師的細心指引，孩子不僅懂了更深層的程式與網頁原理，更被點燃了對 AI 工具的好奇心，激發出更多創作熱情。
+                        </div>
+                        <a href="https://imglab365.github.io/SummerCamp/camp01/06/index.html" target="_blank" class="btn">
+                            <span class="btn-icon">🌐</span> 前往造訪 / 欣賞專屬網頁
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- ─── 3. 引導區塊  ─── -->
+        <section class="footer-cta">
+            <h3>想讓孩子也擁有<br>帶得走的數位競爭力嗎？</h3>
+            <p>沒有基礎也能學！我們的營隊與常態課程，透過專案實作與啟發式引導，讓孩子不再只是「玩遊戲的人」，而是成為「創造未來的人」。</p>
+            
+            <!-- 最下列引導連結 -->
+            <a href="https://www.instagram.com/image.lab365/" class="cta-btn-primary">
+                👉 關注粉絲專頁，不錯過最新消息！
+            </a>
+            <br>
+            <a href="https://imaginationlab.com.tw" class="cta-btn-secondary">
+                了解更多關於 Imagination Lab 的教學理念
+            </a>
+        </section>
+
+    </main>
+
+</body>
+</html>
