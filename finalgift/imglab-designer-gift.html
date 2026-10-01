@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scratch小小遊戲設計師 - 期末禮物</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* 自訂字體與動畫效果 */
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+        
+        body {
+            font-family: 'Nunito', 'Microsoft JhengHei', sans-serif;
+            background-color: #f0fdf4; /* 淺綠色背景*/
+            background-image: radial-gradient(#bbf7d0 2px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        /* 立體陰影效果 */
+        .game-card {
+            box-shadow: 6px 6px 0px 0px #cbd5e1;
+            transition: all 0.2s ease-in-out;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-4px) translateX(-4px);
+            box-shadow: 10px 10px 0px 0px #94a3b8;
+        }
+
+        /* 彈跳動畫 */
+        .btn-bounce:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="text-gray-800 pb-20">
+
+    <header class="bg-blue-500 text-white shadow-md border-b-8 border-blue-600">
+        <div class="max-w-5xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between">
+            
+            <!-- ========================================== -->
+            <div class="mb-4 md:mb-0 transform rotate-1 hover:rotate-0 transition-transform">
+                <!-- 請將 src 替換為您的 logo png 檔案路徑 -->
+                <img src="logo.png" alt="想像力實驗室 Logo" class="h-28 md:h-35 object-contain">
+            </div>
+            
+            <div class="text-center md:text-right">
+                <h1 class="text-3xl md:text-4xl font-black mb-2 tracking-wide text-yellow-300 drop-shadow-md">
+                     Scratch 小小遊戲設計師
+                </h1>
+                <p class="text-lg font-bold">🎉 115-1學期期末禮物，快來下載的檔案吧！</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 mt-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- ========================================== -->
+            <!-- 遊戲 1 -->
+            <!-- ========================================== -->
+            <div class="game-card bg-white rounded-3xl border-4 border-gray-200 overflow-hidden flex flex-col relative">
+                <!-- 圖片預覽區 -->
+                <div class="bg-pink-100 h-48 flex items-center justify-center border-b-4 border-gray-200">
+                    <img src="https://placehold.co/400x200/ffb6c1/ffffff?text=Game+1+Image" alt="遊戲1截圖" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h2 class="text-2xl font-black text-pink-600 mb-2">🎈 遊戲一：昆蟲愛花朵</h2>
+                    <p class="text-gray-600 mb-6 font-bold flex-1">（遊戲簡介）</p>
+                    
+                    <!-- 1. 完整版遊戲按鈕 -->
+                    <a href="https://scratch.mit.edu/projects/1279130262/fullscreen/" target="_blank" class="btn-bounce block w-full text-center bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-xl mb-4 transition-colors">
+                        <i class="fa-solid fa-play mr-2"></i> 點我玩完整版遊戲
+                    </a>
+                    
+                    <div class="border-t-2 border-dashed border-gray-300 my-4"></div>
+                    
+                    <!-- 下載區 -->
+                    <h3 class="text-sm font-bold text-gray-400 mb-3 uppercase tracking-wider">📥 下載區</h3>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <!-- 2. 學生版 (SB3檔) -->
+                        <a href="昆蟲愛花朵_學生版.sb3" download class="btn-bounce flex-1 bg-green-100 hover:bg-green-200 text-green-700 font-bold py-2 px-3 rounded-xl text-sm flex items-center justify-center border-2 border-green-300">
+                            <i class="fa-solid fa-download mr-1"></i> 學生版 (.sb3)
+                        </a>
+                        <!-- 3. 教學簡報 (PDF檔) -->
+                        <a href="昆蟲愛花朵_期末任務書.pdf" target="_blank" class="btn-bounce flex-1 bg-orange-100 hover:bg-orange-200 text-orange-700 font-bold py-2 px-3 rounded-xl text-sm flex items-center justify-center border-2 border-orange-300">
+                            <i class="fa-solid fa-file-pdf mr-1"></i> 教學簡報 (.pdf)
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- 遊戲 2 -->
+            <!-- ========================================== -->
+            <div class="game-card bg-white rounded-3xl border-4 border-gray-200 overflow-hidden flex flex-col relative">
+                <div class="bg-blue-100 h-48 flex items-center justify-center border-b-4 border-gray-200">
+                    <img src="https://placehold.co/400x200/93c5fd/ffffff?text=Game+2+Image" alt="遊戲2截圖" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h2 class="text-2xl font-black text-blue-600 mb-2">🚀 遊戲二：</h2>
+                    <p class="text-gray-600 mb-6 font-bold flex-1">（遊戲簡介）</p>
+                    
+                    <!-- 1. 完整版遊戲按鈕 -->
+                    <a href="【請替換：遊戲2_完整版網址】" target="_blank" class="btn-bounce block w-full text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl mb-4 transition-colors">
+                        <i class="fa-solid fa-play mr-2"></i> 點我玩完整版遊戲
+                    </a>
+                    
+                    <div class="border-t-2 border-dashed border-gray-300 my-4"></div>
+                    
+                    <h3 class="text-sm font-bold text-gray-400 mb-3 uppercase tracking-wider">📥 下載區</h3>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <!-- 2. 學生版 (SB3檔) -->
+                        <a href="【請替換：遊戲2_學生版.sb3】" download class="btn-bounce flex-1 bg-green-100 hover:bg-green-200 text-green-700 font-bold py-2 px-3 rounded-xl text-sm flex items-center justify-center border-2 border-green-300">
+                            <i class="fa-solid fa-download mr-1"></i> 學生版 (.sb3)
+                        </a>
+                        <!-- 3. 教學簡報 (PDF檔) -->
+                        <a href="【請替換：遊戲2_教學簡報.pdf】" target="_blank" class="btn-bounce flex-1 bg-orange-100 hover:bg-orange-200 text-orange-700 font-bold py-2 px-3 rounded-xl text-sm flex items-center justify-center border-2 border-orange-300">
+                            <i class="fa-solid fa-file-pdf mr-1"></i> 教學簡報 (.pdf)
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- 遊戲 3 -->
+            <!-- ========================================== -->
+            <div class="game-card bg-white rounded-3xl border-4 border-gray-200 overflow-hidden flex flex-col relative">
+                <div class="bg-yellow-100 h-48 flex items-center justify-center border-b-4 border-gray-200">
+                    <img src="https://placehold.co/400x200/fde047/ffffff?text=Game+3+Image" alt="遊戲3截圖" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h2 class="text-2xl font-black text-yellow-600 mb-2">🍎 遊戲三：</h2>
+                    <p class="text-gray-600 mb-6 font-bold flex-1">（遊戲簡介）</p>
+                    
+                    <!-- 1. 完整版遊戲按鈕 -->
+                    <a href="【請替換：遊戲3_完整版網址】" target="_blank" class="btn-bounce block w-full text-center bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-xl mb-4 transition-colors">
+                        <i class="fa-solid fa-play mr-2"></i> 點我玩完整版遊戲
+                    </a>
+                    
+                    <div class="border-t-2 border-dashed border-gray-300 my-4"></div>
+                    
+                    <h3 class="text-sm font-bold text-gray-400 mb-3 uppercase tracking-wider">📥 下載區</h3>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <!-- 2. 學生版 (SB3檔) -->
+                        <a href="【請替換：遊戲3_學生版.sb3】" download class="btn-bounce flex-1 bg-green-100 hover:bg-green-200 text-green-700 font-bold py-2 px-3 rounded-xl text-sm flex items-center justify-center border-2 border-green-300">
+                            <i class="fa-solid fa-download mr-1"></i> 學生版 (.sb3)
+                        </a>
+                        <!-- 3. 教學簡報 (PDF檔) -->
+                        <a href="【請替換：遊戲3_教學簡報.pdf】" target="_blank" class="btn-bounce flex-1 bg-orange-100 hover:bg-orange-200 text-orange-700 font-bold py-2 px-3 rounded-xl text-sm flex items-center justify-center border-2 border-orange-300">
+                            <i class="fa-solid fa-file-pdf mr-1"></i> 教學簡報 (.pdf)
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================== -->
+            <!-- 遊戲 4 (Bonus 表現優良專屬) -->
+            <!-- ========================================== -->
+            <div class="game-card bg-purple-50 rounded-3xl border-4 border-purple-300 overflow-hidden flex flex-col relative transform md:scale-105 z-10 shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+                <!-- Bonus 標籤 -->
+                <div class="absolute top-4 -right-8 bg-yellow-400 text-yellow-900 font-black text-sm py-1 px-10 transform rotate-45 shadow-md">
+                    🌟 表現優良專屬
+                </div>
+                
+                <div class="bg-purple-200 h-48 flex items-center justify-center border-b-4 border-purple-300">
+                    <img src="https://placehold.co/400x200/d8b4fe/ffffff?text=Bonus+Game" alt="Bonus遊戲截圖" class="w-full h-full object-cover opacity-90">
+                </div>
+                <div class="p-6 flex-1 flex flex-col">
+                    <h2 class="text-2xl font-black text-purple-700 mb-2 mt-2">👑 隱藏bonus：</h2>
+                    <p class="text-purple-800 mb-6 font-bold flex-1">給特別優秀的小設計師！bonus禮物！</p>
+                    
+                    <!-- 1. 完整版遊戲按鈕 -->
+                    <a href="【請替換：遊戲4_完整版網址】" target="_blank" class="btn-bounce block w-full text-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-xl mb-4 transition-colors shadow-lg">
+                        <i class="fa-solid fa-crown mr-2 text-yellow-300"></i> 挑戰bonus遊戲
+                    </a>
+                    
+                    <div class="border-t-2 border-dashed border-purple-300 my-4"></div>
+                    
+                    <h3 class="text-sm font-bold text-purple-500 mb-3 uppercase tracking-wider">📥 專屬下載區</h3>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <!-- 2. 學生版 (SB3檔) -->
+                        <a href="【請替換：遊戲4_學生版.sb3】" download class="btn-bounce flex-1 bg-green-100 hover:bg-green-200 text-green-700 font-bold py-2 px-3 rounded-xl text-sm flex items-center justify-center border-2 border-green-300">
+                            <i class="fa-solid fa-download mr-1"></i> 進階學生版 (.sb3)
+                        </a>
+                        <!-- 3. 教學簡報 (PDF檔) -->
+                        <a href="【請替換：遊戲4_教學簡報.pdf】" target="_blank" class="btn-bounce flex-1 bg-orange-100 hover:bg-orange-200 text-orange-700 font-bold py-2 px-3 rounded-xl text-sm flex items-center justify-center border-2 border-orange-300">
+                            <i class="fa-solid fa-file-pdf mr-1"></i> 進階教學 (.pdf)
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="mt-16 text-center text-gray-500 font-bold">
+        <p>✨ 期待看到大家創作的精彩遊戲！繼續發揮你們的想像力吧！ ✨</p>
+        <p class="text-sm mt-2">© 2026 想像力實驗室. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
