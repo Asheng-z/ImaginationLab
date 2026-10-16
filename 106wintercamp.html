@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI智慧商店創作營 | 想像力實驗室</title>
+
+    <!-- 字體：標題用思源宋體、內文用思源黑體（離線時自動退回系統字體） -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* 品牌三色維持不變：深藍 / 橘紅 / 暖黃，其餘皆為其衍生的中性色 */
+        :root {
+            --navy: #1a365d;
+            --navy-deep: #12264a;
+            --coral: #dd482f;
+            --coral-text: #c63a22;      /* 小字用的橘紅，對比度較足 */
+            --yellow: #f6c945;
+            --yellow-tint: #fdf6dc;
+            --yellow-line: #f1df9c;
+            --paper: #f5f7fb;
+            --line: #e3e8f0;
+            --text: #2a3445;
+            --muted: #5b6778;
+
+            --serif: 'Noto Serif TC', 'Songti TC', 'PMingLiU', serif;
+            --sans: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+
+            --shadow: 0 1px 2px rgba(18, 38, 74, 0.06), 0 12px 28px -14px rgba(18, 38, 74, 0.28);
+            interpolate-size: allow-keywords;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html { -webkit-text-size-adjust: 100%; }
+
+        body {
+            background-color: #e4e9f1;
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 16px;
+            line-height: 1.75;
+            letter-spacing: 0.02em;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        ::selection { background: var(--yellow); color: var(--navy-deep); }
+
+        p { text-wrap: pretty; }
+        h1, h2, h3, h4 { text-wrap: balance; }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: #fff;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 20px 60px -20px rgba(18, 38, 74, 0.35);
+            overflow-x: clip; 
+        }
+
+        /* 圖示（內嵌 SVG，取代 emoji，各平台外觀一致） */
+        .ic {
+            width: 1.1em;
+            height: 1.1em;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.75;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            vertical-align: -0.2em;
+            flex: none;
+        }
+
+        /* 標題列 */
+        header {
+            background-color: rgba(255, 255, 255, 0.9);
+            -webkit-backdrop-filter: saturate(1.4) blur(14px);
+            backdrop-filter: saturate(1.4) blur(14px);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* 修改為單純的 Logo 容器，去除原本的虛線邊框 */
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 0;
+        }
+        .logo-wrapper img { 
+            display: block; 
+            height: 36px; 
+            width: auto; 
+            object-fit: contain;
+        }
+
+        /* 各區塊底色交替 */
+        .page-section { padding: 64px 24px; }
+        #page2 { background-color: var(--paper); padding-top: 92px; }
+        #page3 { background-color: #fff; }
+        #page-photos { background-color: var(--paper); }
+        #page4 { background-color: #fff; padding-bottom: 72px; }
+
+        /* 區塊標題 */
+        h2.section-title {
+            text-align: center;
+            color: var(--navy);
+            margin-bottom: 36px;
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.4;
+            letter-spacing: 0.08em;
+        }
+        h2.section-title::after {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            margin: 18px auto 0;
+            border-radius: 50%;
+            background-color: var(--yellow);
+            box-shadow: -18px 0 0 var(--navy), 18px 0 0 var(--coral);
+        }
+
+        /* Page 1: 主視覺區 */
+        #page1 {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            padding: 60px 24px 68px;
+            background-color: var(--navy-deep);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1.5px);
+            background-size: 20px 20px;
+        }
+        #page1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: calc(100% - 6px);
+            height: 36px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='36' viewBox='0 0 60 36'%3E%3Cpath d='M0 0h30v21a15 15 0 0 1-30 0z' fill='%23dd482f'/%3E%3Cpath d='M30 0h30v21a15 15 0 0 1-30 0z' fill='%23fffaf0'/%3E%3Crect width='60' height='4' fill='%23000' opacity='.14'/%3E%3C/svg%3E") repeat-x center top / 60px 36px;
+            filter: drop-shadow(0 6px 6px rgba(18, 38, 74, 0.22));
+            transform-origin: top;
+            animation: awning-drop 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+        }
+        #page1 h1 {
+            font-family: var(--serif);
+            font-weight: 700;
+            font-size: clamp(2rem, 9.4vw, 2.6rem);
+            line-height: 1.25;
+            letter-spacing: 0.06em;
+            color: var(--yellow);
+            margin-bottom: 16px;
+        }
+        #page1 .subtitle {
+            font-family: var(--serif);
+            font-weight: 600;
+            font-size: 1.05rem;
+            letter-spacing: 0.1em;
+            color: #fff;
+            margin-bottom: 22px;
+        }
+        #page1 .lead {
+            font-size: 0.95rem;
+            line-height: 1.95;
+            color: #b8c5dc;
+        }
+        .highlight-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 28px;
+        }
+        .tag {
+            padding: 5px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 999px;
+            color: #e6ecf7;
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            line-height: 1.6;
+        }
+
+        @keyframes awning-drop { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+        @keyframes hero-in { from { opacity: 0; } to { opacity: 1; } }
+        #page1 > * { animation: hero-in 0.9s ease-out both; }
+        #page1 > :nth-child(1) { animation-delay: 0.1s; }
+        #page1 > :nth-child(2) { animation-delay: 0.25s; }
+        #page1 > :nth-child(3) { animation-delay: 0.4s; }
+        #page1 > :nth-child(4) { animation-delay: 0.55s; }
+
+        /* Page 2: 核心能力 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            border-top: 1px solid #dbe2ed;
+        }
+        .feature-card {
+            display: grid;
+            grid-template-columns: 44px 1fr;
+            column-gap: 16px;
+            padding: 22px 0;
+            border-bottom: 1px solid #dbe2ed;
+        }
+        .feature-icon {
+            grid-column: 1;
+            grid-row: 1 / span 2;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background-color: var(--navy);
+            color: var(--yellow);
+            display: grid;
+            place-items: center;
+        }
+        .feature-icon .ic { width: 22px; height: 22px; }
+        .feature-card h3 {
+            grid-column: 2;
+            color: var(--navy);
+            font-family: var(--serif);
+            font-size: 1.08rem;
+            font-weight: 700;
+            line-height: 1.5;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+        .feature-card h3 .k { color: var(--coral-text); }
+        .feature-card p {
+            grid-column: 2;
+            font-size: 0.93rem;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        .tools-box {
+            margin-top: 32px;
+            padding: 18px 20px;
+            background-color: var(--yellow-tint);
+            border: 1px solid var(--yellow-line);
+            border-radius: 16px;
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: var(--navy);
+        }
+        .tools-box .ic { width: 1.25em; height: 1.25em; margin-right: 0.15em; color: #a87900; }
+
+        /* Page 3: 每日軌跡 */
+        .timeline {
+            position: relative;
+            padding-left: 34px;
+            margin-bottom: 40px;
+        }
+        .day-item {
+            position: relative;
+            margin-bottom: 28px;
+        }
+        .day-item:last-child { margin-bottom: 0; }
+        .day-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 2px solid var(--navy);
+        }
+        .day-item:last-child::before {
+            background-color: var(--coral);
+            border-color: var(--coral);
+        }
+        .day-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 20px;
+            bottom: -24px;
+            width: 2px;
+            background-color: var(--yellow);
+        }
+        .day-title {
+            font-family: var(--serif);
+            font-weight: 700;
+            color: var(--navy);
+            font-size: 1.08rem;
+            line-height: 1.5;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+        }
+        .day-title .day-no { color: var(--coral-text); }
+        .day-result {
+            font-size: 0.93rem;
+            line-height: 1.85;
+            background-color: var(--paper);
+            padding: 14px 16px;
+            border-radius: 12px;
+            color: #44506a;
+        }
+        .highlight-gift {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            padding: 5px 12px 5px 10px;
+            background-color: var(--yellow-tint);
+            border: 1px solid var(--yellow-line);
+            color: var(--navy);
+            border-radius: 10px;
+            font-size: 0.84rem;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+        .highlight-gift .ic { color: var(--coral-text); }
+
+        .sub-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 48px 0 18px;
+            color: var(--navy);
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+        }
+        .sub-title .ic { color: var(--coral-text); }
+
+        /* 折疊式課表 */
+        .schedule-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .schedule-item {
+            background-color: #fff;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .schedule-item[open] {
+            border-color: var(--navy);
+            box-shadow: var(--shadow);
+        }
+        details { width: 100%; }
+        summary {
+            list-style: none;
+            cursor: pointer;
+        }
+        summary::-webkit-details-marker { display: none; }
+        .schedule-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 18px;
+            background-color: #fff;
+            color: var(--navy);
+            font-size: 0.98rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            transition: background-color 0.25s ease, color 0.25s ease;
+        }
+        .schedule-item[open] .schedule-header {
+            background-color: var(--navy);
+            color: #fff;
+        }
+        .schedule-header::after {
+            content: '';
+            width: 14px;
+            height: 14px;
+            flex: none;
+            color: var(--coral);
+            background:
+                linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat,
+                linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat;
+            transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease;
+        }
+        .schedule-item[open] .schedule-header::after {
+            color: var(--yellow);
+            transform: rotate(45deg);
+        }
+        summary:focus-visible { outline: 2px solid var(--coral); outline-offset: -4px; }
+
+        .schedule-content {
+            padding: 8px 18px 18px;
+            background-color: #fff;
+        }
+        .time-block {
+            display: grid;
+            grid-template-columns: 44px 1fr;
+            column-gap: 12px;
+            padding: 14px 0 6px;
+            font-size: 0.9rem;
+        }
+        .time-col {
+            padding-top: 1px;
+            color: var(--coral-text);
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+        }
+        .content-col strong {
+            display: block;
+            margin-top: 12px;
+            color: var(--navy);
+            font-size: 0.93rem;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+        .content-col strong:first-child { margin-top: 0; }
+        .content-col span {
+            display: block;
+            margin-top: 2px;
+            font-size: 0.84rem;
+            line-height: 1.7;
+            color: var(--muted);
+        }
+        .lunch-break {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 12px 0 2px;
+            color: var(--muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.06em;
+        }
+        .lunch-break::before,
+        .lunch-break::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: var(--line);
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            @supports selector(::details-content) {
+                details::details-content {
+                    block-size: 0;
+                    overflow: hidden;
+                    transition: block-size 0.35s ease, content-visibility 0.35s allow-discrete;
+                }
+                details[open]::details-content { block-size: auto; }
+            }
+        }
+
+        /* 課堂花絮 */
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 14px;
+            margin: 0 -24px;
+            padding: 4px 24px 18px;
+            scroll-padding: 0 24px;
+            scrollbar-width: thin;
+            scrollbar-color: #c3ccda transparent;
+        }
+        .horizontal-scroll::-webkit-scrollbar { height: 6px; }
+        .horizontal-scroll::-webkit-scrollbar-thumb { background-color: #c3ccda; border-radius: 10px; }
+
+        /* 確保放入的圖片可以完美填滿框框且不變形 */
+        .scroll-item,
+        .example-cover {
+            display: flex;
+            overflow: hidden;
+            background: #eef2f8; /* 圖片載入前的底色 */
+        }
+        .scroll-item img,
+        .example-cover img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 自動裁切填滿，不變形 */
+            background-color: #fff;
+        }
+        .scroll-item {
+            flex: 0 0 78%;
+            scroll-snap-align: start;
+            aspect-ratio: 4 / 3;
+            border-radius: 18px;
+            border: 1px solid var(--line);
+        }
+        .scroll-hint {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 6px;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+        }
+
+        /* Page 4: 網站範例 */
+        .example-card {
+            background-color: #fff;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+        }
+        .example-cover {
+            aspect-ratio: 16 / 10;
+            border-bottom: 1px solid var(--line);
+        }
+        .example-info {
+            padding: 24px 20px 26px;
+            text-align: center;
+        }
+        .example-info h4 {
+            color: var(--navy);
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+        .example-info p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+        .btn-demo {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--navy);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.93rem;
+            letter-spacing: 0.06em;
+            padding: 11px 24px;
+            border-radius: 999px;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+        .btn-demo .ic { color: var(--yellow); }
+        .btn-demo:hover { background-color: var(--navy-deep); }
+        .btn-demo:active { transform: translateY(1px); }
+        .btn-demo:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+
+        .more-note {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 0.93rem;
+            line-height: 1.9;
+            color: var(--muted);
+        }
+        .more-note strong { color: var(--navy); }
+
+        /* 報名區塊 */
+        .cta-box {
+            background-color: var(--navy-deep);
+            color: #fff;
+            padding: 34px 22px 28px;
+            border-radius: 24px;
+            text-align: left;
+            margin-top: 36px;
+            box-shadow: 0 24px 40px -20px rgba(18, 38, 74, 0.55);
+        }
+        .cta-title {
+            text-align: center;
+            font-family: var(--serif);
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            color: var(--yellow);
+        }
+        .info-list {
+            list-style: none;
+            font-size: 0.93rem;
+            margin-bottom: 22px;
+        }
+        .info-list li {
+            position: relative;
+            padding: 11px 0 11px 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            line-height: 1.7;
+        }
+        .info-list li:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+        .info-list .ic {
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 18px;
+            height: 18px;
+            color: var(--yellow);
+        }
+        .info-list strong { font-weight: 500; color: #b9c6dc; }
+
+        .price-box {
+            padding: 4px 18px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 11px 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.16);
+            font-size: 0.93rem;
+            color: #c9d4e6;
+            font-variant-numeric: tabular-nums;
+        }
+        .price-item > span:last-child { font-family: var(--serif); }
+        .price-highlight {
+            color: var(--yellow);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .price-highlight.is-best { font-size: 1.4rem; }
+        .price-note {
+            margin-top: 10px;
+            font-size: 0.78rem;
+            color: #aebbd3;
+            text-align: right;
+        }
+
+        .btn-submit {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 16px;
+            background-color: var(--coral);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            letter-spacing: 0.08em;
+            border-radius: 999px;
+            box-shadow: 0 10px 20px -8px rgba(221, 72, 47, 0.65);
+            transition: background-color 0.25s ease, transform 0.2s ease;
+        }
+        .btn-submit:hover { background-color: #e65a41; }
+        .btn-submit:active { background-color: #c53018; transform: translateY(1px); }
+        .btn-submit:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+
+        .notice {
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            font-size: 0.84rem;
+            line-height: 1.9;
+            color: #c9d4e6;
+        }
+        .notice strong { color: #fff; }
+        .notice .ic { color: var(--yellow); }
+
+        @media (max-width: 360px) {
+            .page-section { padding-left: 18px; padding-right: 18px; }
+            .horizontal-scroll { margin: 0 -18px; padding: 4px 18px 18px; scroll-padding: 0 18px; }
+            .cta-box { padding-left: 18px; padding-right: 18px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 圖示庫 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+    <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+    <symbol id="i-gamepad" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11"/><line x1="8" x2="8" y1="9" y2="13"/><line x1="15" x2="15.01" y1="12" y2="12"/><line x1="18" x2="18.01" y1="10" y2="10"/><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol>
+    <symbol id="i-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol>
+    <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+    <symbol id="i-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-swipe" viewBox="0 0 24 24"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></symbol>
+</svg>
+
+<div class="container">
+
+    <!-- 頂部 Logo -->
+    <header>
+        <div class="logo-wrapper">
+            <!-- ⬇️ 替換 src 內的網址為您的 Logo 圖片網址 ⬇️ -->
+            <img src="請替換為您的Logo圖片網址.png" alt="想像力實驗室 Logo">
+        </div>
+    </header>
+
+    <section id="page1">
+        <h1>AI智慧商店創作營</h1>
+        <div class="subtitle">把開店點子，做成看得見的品牌作品</div>
+
+        <p class="lead">
+            四天串起 AI 創作、品牌設計與 HTML 網站<br>從孩子的興趣，開一間自己的店！
+        </p>
+
+        <div class="highlight-tags">
+            <span class="tag">小三至國二</span>
+            <span class="tag">四日整天</span>
+            <span class="tag">零基礎可</span>
+        </div>
+    </section>
+
+    <section id="page2" class="page-section">
+        <h2 class="section-title">這四天，我們學什麼？</h2>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><svg class="ic" aria-hidden="true"><use href="#i-bag"/></svg></div>
+                <h3><span class="k">A.</span> 商店發想</h3>
+                <p>設定專屬店名、商品分類與「品牌三色」，塑造獨一無二的商店 DNA。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg class="ic" aria-hidden="true"><use href="#i-bot"/></svg></div>
+                <h3><span class="k">B.</span> AI 協作創作</h3>
+                <p>運用 ChatGPT 等 AI 工具，精準詠唱出精美的商品圖與六格廣告分鏡。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg class="ic" aria-hidden="true"><use href="#i-gamepad"/></svg></div>
+                <h3><span class="k">C.</span> Scratch 互動</h3>
+                <p>設計顧客體驗流程，包含玩家任務、操作邏輯與遊戲回饋機制。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><svg class="ic" aria-hidden="true"><use href="#i-globe"/></svg></div>
+                <h3><span class="k">D.</span> 品牌網站與市集</h3>
+                <p>把所有作品打包成「一頁式專屬網頁」，在最終市集中互相交流體驗。</p>
+            </div>
+        </div>
+
+        <div class="tools-box">
+            <svg class="ic" aria-hidden="true"><use href="#i-bulb"/></svg> <strong>免自備電腦：</strong><br>
+            實驗室提供 1:1 Apple 筆電與平板操作！
+        </div>
+    </section>
+
+    <section id="page3" class="page-section">
+        <h2 class="section-title">每日創作學習軌跡</h2>
+        <div class="timeline">
+            <div class="day-item">
+                <div class="day-title"><span class="day-no">Day 1</span> | 想像啟動</div>
+                <div class="day-result">認識 AI 能力限制，發想商店主題，選定「品牌三色」並生成首批商品初圖。</div>
+            </div>
+            <div class="day-item">
+                <div class="day-title"><span class="day-no">Day 2</span> | 互動雛形</div>
+                <div class="day-result">製作 Scratch 基礎任務遊戲，並運用 AI 產出個人 HTML 網站初版。</div>
+            </div>
+            <div class="day-item">
+                <div class="day-title"><span class="day-no">Day 3</span> | 品牌 DNA 大變身</div>
+                <div class="day-result">精修所有視覺素材，設計「一頁式商品 DM」，並完成進階互動設計。</div>
+            </div>
+            <div class="day-item">
+                <div class="day-title"><span class="day-no">Day 4</span> | 歡樂商店市集</div>
+                <div class="day-result">
+                    製作「創作回顧卡」，發布作品集網頁，並進行開放式市集交流體驗！
+                    <br>
+                    <span class="highlight-gift"><svg class="ic" aria-hidden="true"><use href="#i-gift"/></svg> 最終帶回：一頁式 HTML 網頁 ＆ 實體紀念鑰匙圈</span>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="sub-title"><svg class="ic" aria-hidden="true"><use href="#i-list"/></svg> 詳細營隊課表</h3>
+        <div class="schedule-accordion">
+
+            <details class="schedule-item">
+                <summary class="schedule-header">Day 1：商店發想與商品</summary>
+                <div class="schedule-content">
+                    <div class="time-block">
+                        <div class="time-col">上午</div>
+                        <div class="content-col">
+                            <strong>AI 探索與創作練習</strong>
+                            <span>認識 AI 能力與使用原則，練習描述需求並比較生成結果。</span>
+                            <strong>我的商店構想</strong>
+                            <span>決定主題、三項商品與特色。</span>
+                        </div>
+                    </div>
+                    <div class="lunch-break"><span><svg class="ic" aria-hidden="true"><use href="#i-utensils"/></svg> 12:00 - 13:30 午餐與休息</span></div>
+                    <div class="time-block">
+                        <div class="time-col">下午</div>
+                        <div class="content-col">
+                            <strong>品牌風格設計</strong>
+                            <span>確立店名與品牌三色搭配。</span>
+                            <strong>AI 商品創作與整理</strong>
+                            <span>生成並挑選三款可用商品圖，保存商店 DNA 設定。</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details class="schedule-item">
+                <summary class="schedule-header">Day 2：互動初版與網站</summary>
+                <div class="schedule-content">
+                    <div class="time-block">
+                        <div class="time-col">上午</div>
+                        <div class="content-col">
+                            <strong>Scratch 遊戲入門與實作</strong>
+                            <span>認識介面，用簡單遊戲練習程式概念。</span>
+                            <strong>商店互動發想</strong>
+                            <span>決定一個玩家任務、操作與回饋。</span>
+                        </div>
+                    </div>
+                    <div class="lunch-break"><span><svg class="ic" aria-hidden="true"><use href="#i-utensils"/></svg> 12:00 - 13:30 午餐與休息</span></div>
+                    <div class="time-block">
+                        <div class="time-col">下午</div>
+                        <div class="content-col">
+                            <strong>AI 互動創作與修改</strong>
+                            <span>整理想法，生成 Scratch 初版並進行修改測試。</span>
+                            <strong>我的商店網站</strong>
+                            <span>開啟網站初版，修改店名並存檔。</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details class="schedule-item">
+                <summary class="schedule-header">Day 3：作品修正與宣傳</summary>
+                <div class="schedule-content">
+                    <div class="time-block">
+                        <div class="time-col">上午</div>
+                        <div class="content-col">
+                            <strong>Scratch 技巧與商店修正</strong>
+                            <span>確認商品圖可用，調整操作與回饋。</span>
+                            <strong>商店體驗測試</strong>
+                            <span>同學試玩，修正主要問題。</span>
+                        </div>
+                    </div>
+                    <div class="lunch-break"><span><svg class="ic" aria-hidden="true"><use href="#i-utensils"/></svg> 12:00 - 13:30 午餐與休息</span></div>
+                    <div class="time-block">
+                        <div class="time-col">下午</div>
+                        <div class="content-col">
+                            <strong>品牌宣傳設計與分鏡</strong>
+                            <span>沿用商店 DNA 製作一頁式DM，規劃六格廣告分鏡。</span>
+                            <strong>品牌作品整理與補修</strong>
+                            <span>完成宣傳素材，補修互動遊戲。</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+
+            <details class="schedule-item">
+                <summary class="schedule-header">Day 4：網站整合與市集</summary>
+                <div class="schedule-content">
+                    <div class="time-block">
+                        <div class="time-col">上午</div>
+                        <div class="content-col">
+                            <strong>AI 創作與責任 (回顧)</strong>
+                            <span>半堂回顧素養，其餘檢視與補修作品。</span>
+                            <strong>品牌網站完善</strong>
+                            <span>放入商品、DM、分鏡，檢查展示連結與填寫回顧卡。</span>
+                        </div>
+                    </div>
+                    <div class="lunch-break"><span><svg class="ic" aria-hidden="true"><use href="#i-utensils"/></svg> 12:00 - 13:30 午餐與休息</span></div>
+                    <div class="time-block">
+                        <div class="time-col">下午</div>
+                        <div class="content-col">
+                            <strong>商店開市準備</strong>
+                            <span>熟悉操作與介紹。</span>
+                            <strong>智慧商店市集</strong>
+                            <span>分組輪流當店主與顧客交流，整理作品備份。</span>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <section id="page-photos" class="page-section">
+        <h2 class="section-title">營隊精彩花絮</h2>
+        
+        <div class="horizontal-scroll">
+            <!-- 花絮圖片區塊 1 -->
+            <div class="scroll-item">
+                <!-- ⬇️ 替換 src 內的網址為實況照 1 網址 ⬇️ -->
+                <img src="請替換為您的實況照1網址.jpg" alt="課堂實況照 1">
+            </div>
+            
+            <!-- 花絮圖片區塊 2 -->
+            <div class="scroll-item">
+                <!-- ⬇️ 替換 src 內的網址為實況照 2 網址 ⬇️ -->
+                <img src="請替換為您的實況照2網址.jpg" alt="課堂實況照 2">
+            </div>
+            
+            <!-- 花絮圖片區塊 3 -->
+            <div class="scroll-item">
+                <!-- ⬇️ 替換 src 內的網址為實況照 3 網址 ⬇️ -->
+                <img src="請替換為您的實況照3網址.jpg" alt="課堂實況照 3">
+            </div>
+        </div>
+        
+        <div class="scroll-hint"><svg class="ic" aria-hidden="true"><use href="#i-swipe"/></svg> 左右滑動查看更多</div>
+    </section>
+
+    <section id="page4" class="page-section">
+        <h2 class="section-title">網站成果搶先看</h2>
+
+        <div class="example-card">
+            <!-- 1. 填入您的網站封面截圖路徑或 URL -->
+            <div class="example-cover">
+                <img src="./images/demo-cover.jpg" alt="早安補給所 網站首頁截圖">
+             </div>
+
+        <div class="example-info">
+            <h4>示範店鋪：早安補給所</h4>
+            <p>結合點餐互動與品牌視覺的一頁式網站</p>
+            <!-- 2. 將 href="#" 替換成您的示範網站實際網址 -->
+            <a href="https://username.github.io/demo-store/" target="_blank" class="btn-demo">
+                點此體驗示範網站 <svg class="ic" aria-hidden="true"><use href="#i-up-right"/></svg>
+            </a>
+        </div>
+    </div>
+
+        <p class="more-note">
+            同一套教學架構，還能依照孩子興趣打造：<br>
+            <strong>咔嚓研究所 (拍貼機) ｜ 迷因寵物店 ｜ Filter For Fit (服飾)</strong>
+        </p>
+
+        <div class="cta-box">
+            <h3 class="cta-title">寒假營隊 熱烈招生中</h3>
+
+            <ul class="info-list">
+                <li><svg class="ic" aria-hidden="true"><use href="#i-pin"/></svg><strong>上課地點：</strong> 台北市忠孝東路四段169號 8 樓之 1</li>
+                <li><svg class="ic" aria-hidden="true"><use href="#i-cal"/></svg><strong>梯次日期：</strong> 2027/01/21 (四) - 01/24 (日)</li>
+                <li><svg class="ic" aria-hidden="true"><use href="#i-clock"/></svg><strong>營隊時間：</strong> 08:30 - 16:30</li>
+                <li><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg><strong>師生比例：</strong> 1:6 或 1:7 小班制教學</li>
+            </ul>
+
+            <div class="price-box">
+                <div class="price-item">
+                    <span>原價</span>
+                    <span>$8,490</span>
+                </div>
+                <div class="price-item">
+                    <span>早鳥 / 兩人團報</span>
+                    <span class="price-highlight">$7,890</span>
+                </div>
+                <div class="price-item">
+                    <span>早鳥+團報 / 舊生</span>
+                    <span class="price-highlight is-best">$7,290</span>
+                </div>
+                <div class="price-note">
+                    * 早鳥優惠至 12/04 截止
+                </div>
+            </div>
+
+            <!-- ⬇️ 將 href="#" 替換為您的報名表單網址 ⬇️ -->
+            <a href="#" class="btn-submit">立刻預約保留名額 <svg class="ic" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+
+            <div class="notice">
+                <svg class="ic" aria-hidden="true"><use href="#i-alert"/></svg> <strong>報名須知：</strong><br>
+                ・無需自備筆電，上課會提供所需設備。<br>
+                ・午餐由實驗室代訂，將於表單調查飲食禁忌。<br>
+                ・若人數不足取消梯次，將全額退費。
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>
