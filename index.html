@@ -4,10 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>想像力實驗室</title>
+  <meta name="description" content="想像力實驗室專注於國小階段的程式教育，以 Scratch 遊戲開發與 Micro:bit 軟硬體實作為核心，並推出 AI 基礎素養課程。">
+  <meta name="theme-color" content="#FFF9F2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
   
+  <script>document.documentElement.classList.add("js")</script>
   <style>
     /* --- 核心變數設定 --- */
     :root {
@@ -264,11 +267,140 @@
     .delay-1 { transition-delay: 0.1s; }
     .delay-2 { transition-delay: 0.2s; }
     .delay-3 { transition-delay: 0.3s; }
+  
+    /* ===== 質感優化（所有新增樣式集中在此區塊，刪除即可還原）===== */
+    :root{
+      --ink:#2B221B; --ink-soft:#52483F; --accent-deep:#C24E0C; --accent-ink:#A8420A;
+      --line:rgba(94,64,36,.12); --tint:#FFF3E8;
+      --shadow-card:0 1px 2px rgba(80,50,20,.04),0 14px 34px -16px rgba(80,50,20,.14);
+    }
+    html{scroll-padding-top:90px}
+    body{background-image:none;color:var(--ink-soft);line-height:1.9;-webkit-font-smoothing:antialiased}
+    ::selection{background:rgba(255,126,51,.25)}
+    :focus-visible{outline:2px solid var(--accent-deep);outline-offset:3px;border-radius:4px}
+    h1,h2,h3,h4{color:var(--ink);text-wrap:balance;letter-spacing:.02em}
+    p{color:var(--ink-soft);text-wrap:pretty;letter-spacing:.02em}
+    .section>p{max-width:42em}
+
+    /* 進場動畫：僅在 JS 可用時隱藏，幅度更小；尊重減少動態設定 */
+    .fade-in-up{opacity:1;transform:none}
+    .js .fade-in-up{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+    .js .fade-in-up.visible{opacity:1;transform:none}
+
+    /* 導覽列 */
+    nav{padding:6px 0;background:rgba(255,249,242,.82);border-bottom:1px solid var(--line);box-shadow:none}
+    .nav-logo{height:52px;filter:none}
+    .nav-logo:hover{transform:none}
+    .nav-links a{font-size:.98rem;font-weight:500;color:var(--ink);letter-spacing:.06em;padding:6px 0;
+      background:linear-gradient(var(--accent-color),var(--accent-color)) 0 100%/0 2px no-repeat;
+      transition:background-size .25s ease,color .25s ease}
+    .nav-links a:hover{color:var(--accent-ink);background-size:100% 2px}
+
+    /* 主視覺 */
+    header.hero{position:relative;padding:104px 0 88px}
+    header.hero::before{content:'';position:absolute;inset:0;z-index:-1;
+      background-image:linear-gradient(rgba(94,64,36,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(94,64,36,.07) 1px,transparent 1px);
+      background-size:36px 36px;
+      -webkit-mask-image:radial-gradient(ellipse at 50% 40%,#000 15%,transparent 70%);
+      mask-image:radial-gradient(ellipse at 50% 40%,#000 15%,transparent 70%)}
+    header.hero h1{display:flex;flex-direction:column;align-items:center;gap:18px;text-shadow:none}
+    header.hero h1::after{content:'';order:3;width:56px;height:4px;border-radius:2px;background:var(--accent-color);margin-top:10px}
+    .hero-name{font-size:clamp(2.6rem,7vw,4.4rem);font-weight:900;line-height:1.1;letter-spacing:.06em}
+    .hero-tagline{font-size:clamp(1.05rem,2.4vw,1.4rem);font-weight:500;color:var(--ink-soft);letter-spacing:.18em}
+
+    /* 區塊卡片與標題 */
+    .section{border:1px solid var(--line);border-radius:24px;padding:56px 64px;box-shadow:var(--shadow-card);transition:none}
+    .section:hover{transform:none;border-color:var(--line);box-shadow:var(--shadow-card)}
+    .section>h2:first-child{margin-top:0}
+    h2{font-size:clamp(1.7rem,3.4vw,2.1rem);padding-bottom:16px;margin-bottom:28px;border-bottom-color:var(--line)}
+    h2::after{width:56px;border-radius:2px;box-shadow:none}
+    h3{color:var(--accent-ink);font-size:1.3rem}
+    h4{color:var(--accent-ink);font-size:1.15rem}
+    .split-layout{gap:56px}
+    .split-image img,.imagelabphoto img{border:1px solid var(--line);box-shadow:var(--shadow-card)}
+    .split-image img:hover{transform:none}
+
+    /* 最新消息 */
+    .news-item{border:1px solid var(--line);border-radius:16px;padding:28px 32px;gap:12px;box-shadow:none}
+    .news-item:hover{box-shadow:none}
+    .news-item.is-featured{background:var(--tint);border-color:rgba(255,126,51,.45)}
+    .news-item:not(.is-featured) h3{color:var(--ink-soft)!important}
+    .news-tag{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:999px;font-size:.88rem;letter-spacing:.04em;background:rgba(255,126,51,.14);color:var(--accent-ink)}
+    .news-tag::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent-color)}
+    .news-tag.is-closed{background:#EFEBE6;color:#6B6159}
+    .news-tag.is-closed::before{background:#A39A91}
+    .news-meta{display:inline-block;margin-top:8px;font-weight:600;color:var(--accent-ink)}
+    .notice{margin:32px 0 8px;padding:16px 22px;border-radius:12px;background:#F6F1EB;border:1px solid var(--line)}
+    .notice p{margin:0;font-weight:700;color:var(--ink)}
+    .notice span{display:block;margin-top:6px;font-size:.95rem;font-weight:500;color:var(--ink-soft)}
+
+    /* 按鈕（白字對比度提升，移除彈跳放大） */
+    .btn-detail{align-self:flex-start;margin-top:8px;padding:12px 26px;font-size:1rem;letter-spacing:.06em;text-decoration:none;
+      background:var(--accent-deep);color:#fff!important;border-radius:999px;box-shadow:none;
+      transition:background .2s ease,box-shadow .2s ease,border-color .2s ease}
+    .btn-detail:hover{transform:none;background:var(--accent-ink);box-shadow:0 8px 20px -8px rgba(194,78,12,.6)}
+    .btn-detail:active{transform:none;box-shadow:none}
+    .btn-ghost{background:transparent;color:var(--accent-ink)!important;border:1px solid rgba(194,78,12,.4)}
+    .btn-ghost:hover{background:rgba(255,126,51,.1);box-shadow:none}
+
+    /* 工作室經歷時間軸 */
+    .timeline{list-style:none;margin:0;padding:0}
+    .timeline li{position:relative;padding:0 0 20px 28px;color:var(--ink-soft)}
+    .timeline li::before{content:'';position:absolute;left:0;top:.65em;width:9px;height:9px;border-radius:50%;background:var(--accent-color)}
+    .timeline li::after{content:'';position:absolute;left:4px;top:calc(.65em + 12px);bottom:-.65em;width:1px;background:var(--line)}
+    .timeline li:last-child{padding-bottom:0}
+    .timeline li:last-child::after{display:none}
+    .timeline strong{display:block;font-size:.95rem;color:var(--accent-ink)}
+
+    /* 課程進行方式：三步驟編號 */
+    .image-row{counter-reset:step;gap:24px}
+    .image-column-card{position:relative;counter-increment:step;border:1px solid var(--line);box-shadow:var(--shadow-card)}
+    .image-column-card:hover{transform:none}
+    .image-column-card::before{content:counter(step);position:absolute;top:12px;left:12px;z-index:1;width:30px;height:30px;display:grid;place-items:center;
+      border-radius:50%;background:#fff;color:var(--accent-ink);font-weight:700;font-size:.95rem;box-shadow:0 2px 8px rgba(80,50,20,.18)}
+    .image-column-card img{border-bottom:0}
+    .image-column-card .caption{text-align:left;font-weight:500;line-height:1.7;padding:16px 18px;letter-spacing:.02em}
+
+    /* 開課學校：區碼標籤對齊、對比度提升 */
+    #partners h3{margin-top:36px}
+    #partners h3:first-of-type{margin-top:8px}
+    #partners b{display:inline-block;min-width:4.6em;text-align:center;margin-right:12px;padding:2px 10px;border-radius:999px;
+      background:rgba(255,126,51,.12);color:var(--accent-ink);font-size:.88rem}
+
+    /* 聯絡與頁尾 */
+    #contact b{color:var(--ink)}
+    #contact a{color:var(--accent-ink);text-underline-offset:4px;text-decoration-thickness:1px}
+    .line-contact img{width:132px;padding:8px;background:#fff;border:1px solid var(--line);border-radius:14px}
+    footer{padding:36px 20px 48px;font-size:.85rem;letter-spacing:.06em;border-top-color:var(--line)}
+
+    /* 彈窗 */
+    .modal{background-color:rgba(43,34,27,.6)}
+    .modal-content{border:0;border-radius:24px;box-shadow:0 30px 80px -20px rgba(0,0,0,.4)}
+    .btn-modal-action{padding:12px 26px;border-radius:999px;font-weight:700;background:var(--accent-deep)}
+    .btn-modal-action.ig{background:transparent;color:var(--accent-ink)!important;border:1px solid rgba(194,78,12,.4)}
+
+    @media (max-width:768px){
+      html{scroll-padding-top:100px}
+      .section{padding:32px 22px;border-radius:20px}
+      .nav-container{flex-direction:row;flex-wrap:wrap;gap:4px 12px}
+      .nav-logo{height:40px}
+      .nav-links{order:3;width:100%;gap:20px;flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;white-space:nowrap;scrollbar-width:none;padding-bottom:4px}
+      .nav-links::-webkit-scrollbar{display:none}
+      header.hero{padding:64px 0 56px}
+      .split-layout{gap:28px}
+      .btn-detail{align-self:stretch}
+      .line-contact{flex-direction:column;align-items:flex-start}
+    }
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .js .fade-in-up{opacity:1;transform:none;transition:none}
+      *{transition-duration:.01ms!important}
+    }
   </style>
 </head>
 <body>
 
-  <div id="newsModal" class="modal">
+  <div id="newsModal" class="modal" role="dialog" aria-modal="true">
     <div class="modal-content">
       <span class="close-modal" onclick="closeNews()">&times;</span>
       <div class="modal-body">
@@ -292,8 +424,8 @@
         <div style="margin-top:40px; border-top:1px solid #333; padding-top:20px; text-align:center;">
           <p>若開放報名會第一時間通知，敬請期待！快加入我們的官方頻道：</p>
           <div class="btn-group">
-            <a href="https://line.me/R/ti/p/@888hvxnr" target="_blank" class="btn-modal-action">✅ 加入 LINE 通知</a>
-            <a href="https://www.instagram.com/imagelab_365/" target="_blank" class="btn-modal-action ig">📸 追蹤 IG 掌握動態</a>
+            <a href="https://line.me/R/ti/p/@888hvxnr" target="_blank" class="btn-modal-action">加入 LINE 通知</a>
+            <a href="https://www.instagram.com/imagelab_365/" target="_blank" class="btn-modal-action ig">追蹤 IG 掌握動態</a>
           </div>
         </div>
       </div>
@@ -318,7 +450,7 @@
 
   <header class="hero fade-in-up">
     <div class="container">
-      <h1>【想像力實驗室｜用創意開啟孩子的未來】</h1>
+      <h1><span class="hero-name">想像力實驗室</span><span class="hero-tagline">用創意開啟孩子的未來</span></h1>
     </div>
   </header>
 
@@ -328,44 +460,44 @@
       <h2>最新消息</h2>
 
       <!-- 🔥 2027 寒假營隊最新消息卡片 -->
-      <div class="news-item">
-        <span class="news-tag">🔥 2027 寒假營隊｜熱烈報名中</span>
+      <div class="news-item is-featured">
+        <span class="news-tag">2027 寒假營隊｜熱烈報名中</span>
         <h3 style="margin-top:10px;">【2027 寒假營隊】AI 智慧商店創作營</h3>
         <p>
           <strong>把開店點子，做成看得見的品牌作品！</strong><br>
           四天串起 AI 創作、品牌設計與 HTML 網站，從孩子的興趣，開一間自己的店！<br>
-          <span style="color: var(--accent-dark); font-weight: 600; display: inline-block; margin-top: 8px;">
+          <span class="news-meta">
             ✦ 招生對象：小三至國二（零基礎可）<br>
             ✦ 營隊時間：寒假 1/21 ~ 1/24（四日整天）
           </span>
         </p>
-        <button class="btn-detail" onclick="window.open('https://imaginationlab.com.tw/2027%E5%AF%92%E5%81%87%E7%87%9F%E9%9A%8A%E7%B0%A1%E7%AB%A0.html', '_blank')">查看營隊簡章與報名</button>
+        <a class="btn-detail" href="https://imaginationlab.com.tw/2027%E5%AF%92%E5%81%87%E7%87%9F%E9%9A%8A%E7%B0%A1%E7%AB%A0.html" target="_blank" rel="noopener">查看營隊簡章與報名</a>
       </div>
 
       <!-- 2026 暑期營隊截止公告 -->
-      <div style="background-color: #FFF4ED; border: 1px solid rgba(255, 126, 51, 0.3); border-left: 5px solid var(--accent-dark); border-radius: 8px; padding: 16px 20px; margin-bottom: 30px; margin-top: 30px;">
-        <p style="margin: 0; color: var(--accent-dark); font-weight: 700; font-size: 1.05rem;">
-          📢 2026 暑期營隊報名已全數截止<br>
-          <span style="font-size: 0.95rem; color: #555; font-weight: 500; display: inline-block; margin-top: 5px;">感謝家長們的熱烈支持與參與。下方仍保留各場次的課程規劃與內容供大家參考，期待未來與孩子們在想像力實驗室相見！</span>
+      <div class="notice">
+        <p>
+          2026 暑期營隊報名已全數截止<br>
+          <span>感謝家長們的熱烈支持與參與。下方仍保留各場次的課程規劃與內容供大家參考，期待未來與孩子們在想像力實驗室相見！</span>
         </p>
       </div>
 
       <div class="news-item">
-        <span class="news-tag" style="background: #F0F0F0; color: #737373;">📍 2026台北暑期營隊 (報名已結束)</span>
+        <span class="news-tag is-closed">2026台北暑期營隊 (報名已結束)</span>
         <h3 style="margin-top:10px;">【台北限定場】AI 素養 X Scratch 遊戲工程營</h3>
         <p>
           2026 台北限定梯次（北車場 / 敦化場）報名已順利截止。歡迎點擊查看我們為孩子精心設計的完整課表與課程理念！
         </p>
-        <button class="btn-detail" onclick="window.open('TaipeiDM.html', '_blank')">查看營隊課程內容</button>
+        <a class="btn-detail btn-ghost" href="TaipeiDM.html" target="_blank" rel="noopener">查看營隊課程內容</a>
       </div>
 
       <div class="news-item">
-        <span class="news-tag" style="background: #F0F0F0; color: #737373;">🚀 2026 新竹暑期營隊 (報名已結束)</span>
+        <span class="news-tag is-closed">2026 新竹暑期營隊 (報名已結束)</span>
         <h3 style="margin-top:10px;">【新竹/竹北場】AI 素養 X Scratch 遊戲工程營</h3>
         <p>
           在《AI素養 X Scratch遊戲工程營》中，我們帶領孩子認識 AI 的運作邏輯，建立正確的科技倫理。本梯次報名雖已結束，仍歡迎點擊了解我們的課程詳情。
         </p>
-        <button class="btn-detail" onclick="window.open('DM0410.html', '_blank')">查看營隊課程內容</button>
+        <a class="btn-detail btn-ghost" href="DM0410.html" target="_blank" rel="noopener">查看營隊課程內容</a>
       </div>
     </section>
     <section id="about" class="section fade-in-up">
@@ -378,7 +510,7 @@
         </div>
         <div class="split-image">
           <!-- 這是你要新增的第一個照片欄位 -->
-          <img src="images/photo.png" alt="工作室簡介配圖" style="background-color: #f0f0f0; min-height: 250px;">
+          <img loading="lazy" src="images/photo.png" alt="工作室簡介配圖" style="background-color: #f0f0f0; min-height: 250px;">
         </div>
       </div>
 
@@ -386,15 +518,11 @@
       <div class="split-layout" style="margin-bottom: 60px;">
         <div class="split-image">
           <!-- 這裡放你原本那張大合照 (photo.png) -->
-          <img src="images/photo2.png" alt="想像力實驗室經歷照片">
+          <img loading="lazy" src="images/photo2.png" alt="想像力實驗室經歷照片">
         </div>
         <div class="split-text">
           <h2>工作室經歷</h2>
-          <p>111學年度 - 想像力實驗室成立。<br>112學年度 - 受數間學校邀請合作開立課程、暑期資訊課輔。
-            <br>113學年度 - 於約50間學校教導孩子創意實踐與程式語言。
-            <br>114學年度 - 精心設計超過百款課程專案，保持孩子的學習熱情，小孩積極主動聽課，也讓家長放心。
-            <br>115學年度 - 持續拓展雙北與新竹地區的校園合作，並因應科技趨勢，於寒暑假全新推出 AI 科技主題營隊。
-          </p>
+          <ol class="timeline"><li><strong>111學年度</strong>想像力實驗室成立。</li><li><strong>112學年度</strong>受數間學校邀請合作開立課程、暑期資訊課輔。</li><li><strong>113學年度</strong>於約50間學校教導孩子創意實踐與程式語言。</li><li><strong>114學年度</strong>精心設計超過百款課程專案，保持孩子的學習熱情，小孩積極主動聽課，也讓家長放心。</li><li><strong>115學年度</strong>持續拓展雙北與新竹地區的校園合作，並因應科技趨勢，於寒暑假全新推出 AI 科技主題營隊。</li></ol>
         </div>
       </div>
 
@@ -406,7 +534,7 @@
         </div>
         <div class="split-image">
           <!-- 第二個照片欄位 -->
-          <img src="images/photo3.png" alt="工作室理念配圖" style="background-color: #f0f0f0; min-height: 250px;">
+          <img loading="lazy" src="images/photo3.png" alt="工作室理念配圖" style="background-color: #f0f0f0; min-height: 250px;">
         </div>
       </div>
       
@@ -427,7 +555,7 @@
     <section id="curriculum" class="section fade-in-up">
       <div class="split-layout">
         <div class="split-image">
-            <img src="images/course1.jpg" alt="課程圖1">
+            <img loading="lazy" src="images/course1.jpg" alt="課程圖1">
             <div class="caption">Scratch小小遊戲設計師 課表範例</div>
         </div>
         <div class="split-text">
@@ -441,15 +569,15 @@
       <h2>課程進行方式</h2>
       <div class="image-row">
         <div class="image-column-card fade-in-up delay-1">
-          <img src="images/method1.jpg" alt="教學演示">
+          <img loading="lazy" src="images/method1.jpg" alt="教學演示">
           <div class="caption">每堂課由老師引導示範，建立學習基礎。</div>
         </div>
         <div class="image-column-card fade-in-up delay-2">
-          <img src="images/method2.jpg" alt="學生實作">
+          <img loading="lazy" src="images/method2.jpg" alt="學生實作">
           <div class="caption">學生動手實作，深化理解與創造力。</div>
         </div>
         <div class="image-column-card fade-in-up delay-3">
-          <img src="images/method3.jpg" alt="專題發表">
+          <img loading="lazy" src="images/method3.jpg" alt="專題發表">
           <div class="caption">引導學生加入巧思，並於課堂尾聲進行複習。</div>
         </div>
       </div>
@@ -495,10 +623,10 @@
     
     <section id="contact" class="section fade-in-up">
       <h2>聯絡我們</h2>
-      <p><b>Email:</b> imagelab365@gmail.com</p>
+      <p><b>Email:</b> <a href="mailto:imagelab365@gmail.com">imagelab365@gmail.com</a></p>
       <div class="line-contact">
-        <p><b>Line:</b> @888hvxnr</p>
-        <img src="line-qrcode.png" alt="Line QRCODE">
+        <p><b>Line:</b> <a href="https://line.me/R/ti/p/@888hvxnr" target="_blank" rel="noopener">@888hvxnr</a></p>
+        <img loading="lazy" src="line-qrcode.png" alt="Line QRCODE">
       </div>
     </section>
     
@@ -539,6 +667,7 @@
       document.getElementById("newsModal").style.display = "none"; 
       document.body.style.overflow = "auto"; 
     }
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeNews(); });
     window.onclick = function(event) { 
       if (event.target == document.getElementById("newsModal")) closeNews(); 
     }
