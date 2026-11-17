@@ -81,13 +81,9 @@
             </p>
 
             <!-- 1. 完整版遊戲按鈕 -->
-            <a
-              href="https://scratch.mit.edu/projects/1278026683/fullscreen/"
-              target="_blank"
-              class="btn-bounce block w-full text-center bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-xl mb-4 transition-colors"
-            >
+            <button type="button" data-project="1278026683" class="play-btn btn-bounce block w-full text-center bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-4 rounded-xl mb-4 transition-colors">
               <i class="fa-solid fa-play mr-2"></i> 點我玩完整版遊戲
-            </a>
+            </button>
 
             <div class="border-t-2 border-dashed border-gray-300 my-4"></div>
 
@@ -133,13 +129,9 @@
             </p>
 
             <!-- 1. 完整版遊戲按鈕 -->
-            <a
-              href="https://scratch.mit.edu/projects/1297689501/fullscreen/"
-              target="_blank"
-              class="btn-bounce block w-full text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl mb-4 transition-colors"
-            >
+            <button type="button" data-project="1297689501" class="play-btn btn-bounce block w-full text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-xl mb-4 transition-colors">
               <i class="fa-solid fa-play mr-2"></i> 點我玩完整版遊戲
-            </a>
+            </button>
 
             <div class="border-t-2 border-dashed border-gray-300 my-4"></div>
 
@@ -187,13 +179,9 @@
             </p>
 
             <!-- 1. 完整版遊戲按鈕 -->
-            <a
-              href="https://scratch.mit.edu/projects/1277545066/fullscreen/"
-              target="_blank"
-              class="btn-bounce block w-full text-center bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-xl mb-4 transition-colors"
-            >
+            <button type="button" data-project="1277545066" class="play-btn btn-bounce block w-full text-center bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-xl mb-4 transition-colors">
               <i class="fa-solid fa-play mr-2"></i> 點我玩完整版遊戲
-            </a>
+            </button>
 
             <div class="border-t-2 border-dashed border-gray-300 my-4"></div>
 
@@ -250,13 +238,9 @@
             </p>
 
             <!-- 1. 完整版遊戲按鈕 -->
-            <a
-              href="https://scratch.mit.edu/projects/1277509699/fullscreen/"
-              target="_blank"
-              class="btn-bounce block w-full text-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-xl mb-4 transition-colors shadow-lg"
-            >
+            <button type="button" data-project="1277509699" class="play-btn btn-bounce block w-full text-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-4 rounded-xl mb-4 transition-colors shadow-lg">
               <i class="fa-solid fa-crown mr-2 text-yellow-300"></i> 挑戰bonus遊戲
-            </a>
+            </button>
 
             <div class="border-t-2 border-dashed border-purple-300 my-4"></div>
 
@@ -290,5 +274,74 @@
       <p>✨ 期待看到大家創作的精彩遊戲！繼續發揮你們的想像力吧！ ✨</p>
       <p class="text-sm mt-2">© 2026 想像力實驗室. All rights reserved.</p>
     </footer>
+
+    <!-- ========================================== -->
+    <!-- 遊戲播放視窗：以內嵌方式播放，不跳轉到 Scratch 專案頁 -->
+    <!-- ========================================== -->
+    <div id="player-modal" class="hidden fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl border-4 border-gray-200 w-full max-w-2xl p-4 shadow-2xl">
+        <div class="flex items-center justify-between mb-3">
+          <h2 id="player-title" class="text-xl font-black text-gray-700"></h2>
+          <button id="player-close" type="button" class="btn-bounce bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-4 rounded-xl">
+            <i class="fa-solid fa-xmark mr-1"></i> 關閉
+          </button>
+        </div>
+        <div class="w-full bg-gray-100 rounded-xl overflow-hidden" style="aspect-ratio: 4 / 3">
+          <iframe id="player-frame" class="w-full h-full" allowtransparency="true" allow="autoplay; fullscreen; gamepad" allowfullscreen scrolling="no" frameborder="0"></iframe>
+        </div>
+        <p class="text-sm font-bold text-gray-500 mt-3">
+          點「綠旗」開始、「紅色八角形」停止。使用方向鍵或空白鍵前，請先用滑鼠點一下遊戲畫面。
+        </p>
+        <button id="player-switch" type="button" class="mt-2 text-sm font-bold text-blue-600 underline">
+          遊戲打不開？改用 Scratch 官方播放器
+        </button>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var modal = document.getElementById("player-modal");
+        var frame = document.getElementById("player-frame");
+        var title = document.getElementById("player-title");
+        var switchBtn = document.getElementById("player-switch");
+        var currentId = null;
+        var useScratch = false;
+
+        function src() {
+          return useScratch
+            ? "https://scratch.mit.edu/projects/" + currentId + "/embed"
+            : "https://turbowarp.org/" + currentId + "/embed";
+        }
+        function open(id, name) {
+          currentId = id;
+          useScratch = false;
+          title.textContent = name;
+          switchBtn.textContent = "遊戲打不開？改用 Scratch 官方播放器";
+          frame.src = src();
+          modal.classList.remove("hidden");
+        }
+        function close() {
+          modal.classList.add("hidden");
+          frame.src = "about:blank"; // 清空以停止遊戲與音效
+        }
+
+        document.querySelectorAll(".play-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var h2 = btn.closest(".game-card").querySelector("h2");
+            open(btn.dataset.project, h2 ? h2.textContent.trim() : "");
+          });
+        });
+        document.getElementById("player-close").addEventListener("click", close);
+        modal.addEventListener("click", function (e) { if (e.target === modal) close(); });
+        document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+        switchBtn.addEventListener("click", function () {
+          useScratch = !useScratch;
+          switchBtn.textContent = useScratch
+            ? "改回加速播放器（TurboWarp）"
+            : "遊戲打不開？改用 Scratch 官方播放器";
+          frame.src = src();
+        });
+      })();
+    </script>
   </body>
 </html>
